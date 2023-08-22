@@ -1,7 +1,0 @@
-Classification	Family
-Staphylococcus_epidermidis	Staphylococcaceae
-Pseudomonas_aeruginosa	Pseudomonadaceae
-Acinetobacter_baumannii	Moraxellaceae
-Enterobacter_himalayensis	Enterobacteriaceae
-Klebsiella_pneumoniae	Enterobacteriaceae
-unclassified	unclassified
