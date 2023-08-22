@@ -1,0 +1,84 @@
+beta_diversity_analysis <- reactive({
+    data <- analyze_data_reactive()$countsmetadata
+    sample_metadata <- analyze_data_reactive()$sample_metadata
+    fun_heatmap_plot <- function(data) {
+        data_4 <- data %>%
+          group_by(Sample_Id, ARO_term) %>%
+          summarise(Counts = sum(Normalized_counts)) %>%
+          mutate(Counts = log2(Counts))
+        data_4 <- data_4 %>%
+          pivot_wider(names_from = Sample_Id, values_from = Counts)
+        data_4 <- as.data.frame(data_4)
+        rownames(data_4) <- data_4$ARO_term
+        data_4 <- data_4 %>%
+          subset(. , select = -ARO_term) %>%
+          replace(. , is.na(.), 0)
+        row_dend <-  hclust(dist(t(data_4)), method = "complete")
+        column_dend <- hclust(dist(data_4), method = "complete")
+        heatmap_plot <- Heatmap(t(data_4), name = "Log2Counts",
+                                row_names_gp = gpar(fontsize = 6.5),
+                                cluster_rows = color_branches(row_dend),
+                                cluster_columns = color_branches(column_dend),
+                                show_column_names = FALSE,
+                                show_row_names = TRUE)
+        heatmap_ggplot <- as_ggplot(grid.grabExpr(print(heatmap_plot)))
+        return(heatmap_ggplot)
+    }
+    fun_pca_plot <- function(data) {
+        data_4 <- data %>%
+          group_by(Sample_Id, ARO_term) %>%
+          summarise(Counts = sum(Normalized_counts)) %>%
+          mutate(Counts = log2(Counts))
+        data_4 <- data_4 %>%
+          pivot_wider(names_from = Sample_Id, values_from = Counts)
+        data_4 <- as.data.frame(data_4)
+        rownames(data_4) <- data_4$ARO_term
+        data_4 <- data_4 %>%
+          subset(. , select = -ARO_term) %>%
+          replace(. , is.na(.), 0)
+        pca <- prcomp(t(data_4), scale. = TRUE, center = TRUE)
+        pca.var <- pca$sdev^2
+        pca.var.per <- round(pca.var / sum(pca.var) * 100, 1)
+        pca.data <- data.frame(Sample_Id = rownames(pca$x), X=pca$x[,1],Y=pca$x[,2])
+        pca.data <- inner_join(pca.data, sample_metadata, by = "Sample_Id")
+        pca_plot <- ggplot(data = pca.data, aes(x = X, y = Y, color = Group)) +
+          geom_point() +
+          xlab(paste0("PC1 (", pca.var.per[1], "%", ")")) +
+          ylab(paste0("PC2 (", pca.var.per[2], "%", ")")) +
+          theme_bw()
+        return(pca_plot)
+    }
+    return(list(heatmap_plot = fun_heatmap_plot(data),
+    pca_plot = fun_pca_plot(data)))
+})
+observeEvent(input$upload_data, {
+    beta_diversity_plots <- beta_diversity_analysis()
+
+    output$plot_heatmap <- renderPlot({
+      beta_diversity_plots$heatmap_plot
+    })
+
+    output$plot_pca <- renderPlot({
+      beta_diversity_plots$pca_plot
+    })
+
+    output$download_heatmap <- downloadHandler(
+        filename = function() {
+            paste("HeatMap_", Sys.Date(),".png", sep = "")
+        },
+        content = function(file) {
+            ggsave(file, beta_diversity_plots$heatmap_plot,
+                   width = 11.27, height = 14.69, units = "in", dpi = "retina")
+        }
+    )
+
+    output$download_pca <- downloadHandler(
+        filename = function() {
+            paste("PCA_plot_", Sys.Date(), ".png", sep = "")
+        },
+        content = function(file) {
+            ggsave(file, beta_diversity_plots$pca_plot,
+                   width = 11.69, height = 8.27, units = "in", dpi = "retina")
+        }
+    )
+})
