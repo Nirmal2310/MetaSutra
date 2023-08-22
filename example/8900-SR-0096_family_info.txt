@@ -1,5 +1,0 @@
-Classification	Family
-Bifidobacterium breve	Bifidobacteriaceae
-Enterobacter ludwigii	Enterobacteriaceae
-Klebsiella pneumoniae	Enterobacteriaceae
-unclassified	unclassified
