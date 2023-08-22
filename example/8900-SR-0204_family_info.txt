@@ -1,0 +1,5 @@
+Classification	Family
+Enterococcus_faecalis	Enterococcaceae
+Pseudomonas_aeruginosa	Pseudomonadaceae
+Klebsiella_quasipneumoniae	Enterobacteriaceae
+unclassified	unclassified

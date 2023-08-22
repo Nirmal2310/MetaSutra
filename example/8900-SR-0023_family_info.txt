@@ -1,0 +1,6 @@
+Classification	Family
+Enterococcus_faecalis	Enterococcaceae
+Staphylococcus_epidermidis	Staphylococcaceae
+Clostridium_P_perfringens	Clostridiaceae
+Eggerthella_lenta	Eggerthellaceae
+unclassified	unclassified

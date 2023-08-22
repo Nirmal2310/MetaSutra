@@ -1,0 +1,10 @@
+Classification	Family
+Enterococcus_A_avium	Enterococcaceae
+Enterococcus_faecalis	Enterococcaceae
+Clostridium_P_perfringens	Clostridiaceae
+Veillonella_parvula_A	Veillonellaceae
+Veillonella_tobetsuensis	Veillonellaceae
+Bifidobacterium_breve	Bifidobacteriaceae
+Enterobacter_himalayensis	Enterobacteriaceae
+Klebsiella_A_michiganensis	Enterobacteriaceae
+unclassified	unclassified

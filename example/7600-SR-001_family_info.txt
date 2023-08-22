@@ -1,0 +1,7 @@
+Classification	Family
+Enterococcus_B_faecium_B	Enterococcaceae
+Enterococcus_faecalis	Enterococcaceae
+Staphylococcus_epidermidis	Staphylococcaceae
+Enterobacter_kobei	Enterobacteriaceae
+Corynebacterium	Mycobacteriaceae
+unclassified	unclassified

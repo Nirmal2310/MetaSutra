@@ -1,0 +1,8 @@
+Classification	Family
+Enterococcus_B_faecium	Enterococcaceae
+Enterococcus_faecalis	Enterococcaceae
+Veillonella_parvula	Veillonellaceae
+Bifidobacterium_breve	Bifidobacteriaceae
+Enterobacter_ludwigii	Enterobacteriaceae
+Klebsiella_A_oxytoca	Enterobacteriaceae
+unclassified	unclassified

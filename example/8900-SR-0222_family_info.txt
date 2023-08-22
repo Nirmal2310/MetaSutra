@@ -1,0 +1,3 @@
+Classification	Family
+Enterococcus_faecalis	Enterococcaceae
+unclassified	unclassified

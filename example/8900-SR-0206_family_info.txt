@@ -1,0 +1,7 @@
+Classification	Family
+Enterococcus_faecalis	Enterococcaceae
+Flavonifractor_plautii	Oscillospiraceae
+Clostridioides_difficile	Peptostreptococcaceae
+Clostridium_P_perfringens	Clostridiaceae
+Escherichia_coli	Enterobacteriaceae
+unclassified	unclassified
