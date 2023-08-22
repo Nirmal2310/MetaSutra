@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.189">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>instructions</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="Instructions_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Instructions_files/libs/quarto-html/quarto.js"></script>
+<script src="Instructions_files/libs/quarto-html/popper.min.js"></script>
+<script src="Instructions_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Instructions_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Instructions_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Instructions_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Instructions_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Instructions_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Instructions_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="metashiny-app-allows-users-to-process-and-visualize-metagenomic-short-read-sequencing-data." class="level4">
+<h4 class="anchored" data-anchor-id="metashiny-app-allows-users-to-process-and-visualize-metagenomic-short-read-sequencing-data."><strong>MetaShiny App allows users to process and visualize Metagenomic short-read sequencing data.</strong></h4>
+<ul>
+<li><em>Explore</em> the app’s features with the example count data set pre-loaded by clicking on the Input Data tab.</li>
+<li><em>Upload</em> your own samples list in the “Input Data” tab.</li>
+</ul>
+</section>
+<section id="features" class="level4">
+<h4 class="anchored" data-anchor-id="features"><a name="Features" href=""></a> <strong>Features</strong></h4>
+<p><img src="Drug_class.png" alt="Drug Class vs. ARG Abundance" style="width: 30%"> <img src="Resistance_mechanism.png" alt="Resistance Mechanism" style="width: 30%"> <img src="ARG_cohort_richness.png" alt="Cohort ARG Richness" style="width: 30%"> <img src="ARG_Cohort_Abundance.png" alt="Cohort ARG Abundance" style="width: 30%"> <img src="Alpha_diversity.png" alt="Alpha Diversity" style="width: 30%"> <img src="Abundance_Kruskal_Walis.png" alt="Abundance Comparison" style="width: 30%"> <img src="HeatMap.png" alt="HeatMap" style="width: 30%"> <img src="PCA_plot.png" alt="PCA Plot" style="width: 30%"></p>
+<p><em>Data Visualization</em></p>
+<ul>
+<li>ARG Mechanisms (Drug Class vs ARG counts, Resistance Mechanisms, ARG Richness, ARG Abundance)</li>
+<li>Alpha Diversity and Abundance Comparison (Box-plots)</li>
+<li>Clustering (HeatMap, PCA Plot)</li>
+</ul>
+</section>
+<section id="data-format" class="level4">
+<h4 class="anchored" data-anchor-id="data-format"><a name="DataFormat" href=""></a> <strong>Data Format</strong></h4>
+<ul>
+<li>Must be a .csv <em>comma-separated-value</em> file.</li>
+<li>File must have two columns with the headers 1: Sample_Id, 2: Group.</li>
+<li>1: Sample_Id: The name of the sample.</li>
+<li>2: Group: The group that the sample belongs to.</li>
+<li>The first row of the file is the header.</li>
+</ul>
+</section>
+<section id="input-data" class="level4">
+<h4 class="anchored" data-anchor-id="input-data"><a name="InputData" href=""></a> <strong>Input Data</strong></h4>
+<ul>
+<li>Each row from the first column representes the sample name.</li>
+<li>Each row from the second column representes the group (Control or Case).</li>
+</ul>
+<p><img src="input_data.png" alt="Input Data" style="width: 20%"></p>
+</section>
+<section id="output-data" class="level4">
+<h4 class="anchored" data-anchor-id="output-data"><a name="OutputData" href=""></a> <strong>Output Data</strong></h4>
+<ul>
+<li>Each row of the 3rd column represents the ARG term.<br>
+</li>
+<li>Additional columns provide information about</li>
+</ul>
+<ol type="1">
+<li>Drug Class</li>
+<li>Resistance Mechanism</li>
+<li>ARG Counts</li>
+<li>Bacterial Classification, etc.</li>
+</ol>
+<p><img src="output_data.png" alt="Input Data" style="width: 75%"></p>
+</section>
+<section id="additional-information" class="level4">
+<h4 class="anchored" data-anchor-id="additional-information"><a name="help" href=""></a> <strong>Additional Information</strong></h4>
+<p>Additional Information and help are provided under the “Additional Information” tab.</p>
+</section>
+<section id="app-info" class="level4">
+<h4 class="anchored" data-anchor-id="app-info"><strong>App Info</strong></h4>
+<p>The MetaShiny App has been develoed by Nirmal Singh Mahar, Anshul Budhraja, Suman Pakala, Ishaan Gupta and S.V.Rajagopala.</p>
+<p><strong>Please cite our App:</strong></p>
+<p>[]</p>
+<p>The source code of MetaShiny is available on <a href="https://github.com/Nirmal2310/MetaShiny">Github</a>.</p>
+<p>We would appreciate reports of any issues with the app via the issues option of <a href="https://github.com/Nirmal2310/MetaShiny">Github</a></p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
