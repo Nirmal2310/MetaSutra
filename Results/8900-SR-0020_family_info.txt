@@ -1,0 +1,5 @@
+Classification	Family
+Enterococcus_faecalis	Enterococcaceae
+Enterobacter_himalayensis	Enterobacteriaceae
+Klebsiella_quasipneumoniae	Enterobacteriaceae
+unclassified	unclassified

@@ -1,0 +1,8 @@
+Classification	Family
+Citrobacter youngae	Enterobacteriaceae
+Enterococcus faecalis	Enterococcaceae
+Hafnia paralvei	Enterobacteriaceae
+Klebsiella A oxytoca	Enterobacteriaceae
+Romboutsia timonensis	Romboutsiaceae
+Streptococcus agalactiae	Streptococcaceae
+unclassified	unclassified
