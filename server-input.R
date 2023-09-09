@@ -182,8 +182,6 @@ analyze_data_reactive <-
           
           countsmetadata <- inner_join(countsmetadata, sample_metadata, by = "Sample_Id")
           
-          print(countsmetadata)
-          
           return(list('countsmetadata' = countsmetadata, 
                       'sample_metadata' = sample_metadata))
 

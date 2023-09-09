@@ -21,12 +21,16 @@ ui <- navbarPage(
   source("ui-tab-beta-diversity-analysis.R", local = TRUE)$value,
   source("ui-tab-help.R", local = TRUE)$value,
   source("ui-tab-conditions.R", local = TRUE)$value,
+  p(br()),
+  p(br()),
+  p(br()),
+  p(br()),
   footer=p(hr(), p(("ShinyApp created by Nirmal Singh Mahar, Anshul Budhraja,
-                                                  Suman Pakala, Ishaan Gupta and 
-                    S.V. Rajagopala"), align = "center", width=4),
-           p(("Copyrigth (C) 2023, code licensed under GPLv3"), align="center", width=4),
+                                                  Suman Pakala, S.V. Rajagopala* and
+                                                  Ishaan Gupta*"), align = "center", width=2),
+           p(("Copyrigth (C) 2023, code licensed under GPLv3"), align="center", width=2),
            p(("Code available on Github:"), a("https://github.com/Nirmal2310/MetaShiny",
                                               href="https://github.com/Nirmal2310/MetaShiny"),
-             align="center",width=4),
+             align="center",width=2),
            )
   )
