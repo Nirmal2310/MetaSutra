@@ -117,7 +117,3 @@ if { conda env list | grep "R-4.2"; } >/dev/null 2>&1; then
 else
         conda create --name R-4.2 --file R-4.2.txt
 fi
-conda activate R-4.2
-Rscript -e 'packages = c("shiny","shinyFiles","markdown","shinyBS","validate","tidyverse","stringr","ggpubr","dendextend","ComplexHeatmap", "vegan", "grid")
-sapply(packages,function(x){if(!require(x,character.only = T)){install.packages(x)}})'
-conda activate base
