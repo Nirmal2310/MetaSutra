@@ -196,117 +196,264 @@ analyze_data_reactive <-
           
           data_path <- paste0(input$datadir,"/","Data")
           
-          observeEvent(input$Setup, {
-            if(input$Setup){
-              system('cp -r $work_dir/Installation $data_path')
-              system('cd $data_path/Installation && bash env_install.sh')
+          print("Analyzing Raw Data")
+          
+          if(input$Setup){
+            
+            print("Installing Neccessary Data")
+            
+            system(paste0("if [ ! -d ", data_path, " ]; then mkdir ", data_path,"; fi"))
+            
+            system(paste0("cp -r ", work_dir,"/Installation/* ", data_path))
+            
+            setwd(data_path)
+            
+            system('bash env_install.sh')
+            
+            setwd(input$datadir)
+            
+            system('ls *1.fastq.gz | cut -d "_" -f1 > list')
+            
+            system(paste0("if [ ! -d ", result_path, " ]; then mkdir ", result_path,"; fi"))
+            
+            system(paste0("while read sample; do bash ", work_dir,"/Pipeline/rgi_main.sh -s $sample -r ",
+                          fasta_file, " -t ", input$threads,
+                          " -m ", input$memory, " -c ", input$comp, " -d ", input$cont,
+                          "; done < list"))
+            
+            system(paste0("mv ", input$datadir, "/*_out/*_consolidated_final_arg_counts.txt ",
+                          result_path, "/"))
+            
+            system(paste0("mv ", input$datadir, "/*_out/*_family_info.txt ", result_path, "/"))
+            
+            setwd(work_dir)
+            
+            file_list <- gsub(".txt", "", list.files(result_path)
+                              [grep("\\consolidated_final_arg_counts.txt$", list.files(result_path))])
+            
+            family_info_list <- gsub(".txt", "", list.files(result_path)
+                                     [grep("\\_family_info.txt$", list.files(result_path))])
+            
+            print(file_list)
+            
+            if(!is.null(file_list))
+            {
+              samples_header <- gsub("_consolidated_final_arg_counts","", file_list)
+              
+              sample_metadata <- input_data_reactive()$data
+              
+              family_data_list <- list()
+              
+              for (i in 1:length(family_info_list)){
+                family_data_list[[i]] <- read.delim(file = paste0(result_path,"/",family_info_list[i],".txt"), header = TRUE)
+              }
+              
+              family_data_list <- lapply(family_data_list, function(x) {
+                x$Classification <- str_replace_all(string=x$Classification, pattern = "_", replacement = " ") 
+                return(x)})
+              
+              sample_data_list <- list()
+              
+              for (i in 1:length(file_list)){
+                sample_data_list[[i]] <- read.delim(file = paste0(result_path,"/",file_list[i],".txt"), header = TRUE)
+              }
+              
+              sample_data_list <- lapply(sample_data_list, function(x){
+                x <- x %>% filter(Percentage_Identity >= 85, Percentage_Identity <= 100)
+                x <- x %>% filter(Percentage_Coverage >= 85, Percentage_Coverage <= 100)
+                return(x)
+              }
+              )
+              
+              sample_data_list <- lapply(sample_data_list, function(x) {
+                x$Drug_Class <- str_replace_all(string = x$Drug_Class,
+                                                pattern = "\\;.*$", replacement = "")
+                
+                x$AMR_Gene_Family <- str_replace_all(string = x$AMR_Gene_Family,
+                                                     pattern = "\\;.*$", replacement = "")
+                
+                x$Resistance_Mechanism <- str_replace_all(string = x$Resistance_Mechanism,
+                                                          pattern = "\\;.*$", replacement = "")
+                return(x)
+              }
+              )
+              
+              for (i in 1:length(sample_data_list))
+              {
+                sample_data_list[[i]]$Sample_Id <- samples_header[i]
+              }
+              
+              duplicates_removal <- function(df)
+              {
+                temp <- df %>%
+                  group_by(Sample_Id,Classification,ARO_term) %>%
+                  summarise(Summed_Counts = sum(Counts))
+                
+                temp2 <- subset(df, select = -c(Counts, ARG))
+                
+                df <- inner_join(temp, temp2, 
+                                 by = c("ARO_term","Classification", "Sample_Id"))
+                
+                df <- rename(df, Counts = Summed_Counts)
+                
+                return(df)
+              }
+              
+              
+              sample_data_list <- lapply(sample_data_list, duplicates_removal)
+              
+              gpcm_calculation <- function(df)
+              {
+                df$Normalized_counts <- round(((df$Counts/df$ARG_length)*10^6/
+                                                 sum(df$Counts/df$ARG_length)), digits = 2)
+                return(df)
+              }
+              
+              sample_data_list <- lapply(sample_data_list, gpcm_calculation)
+              
+              for (i in 1:length(samples_header)){
+                
+                sample_data_list[[i]] <- inner_join(sample_data_list[[i]],
+                                                    family_data_list[[i]], by = "Classification")
+                
+              }
+              
+              countsmetadata <- do.call("rbind", sample_data_list)
+              
+              countsmetadata <- inner_join(countsmetadata, sample_metadata, by = "Sample_Id")
+              
+              return(list('countsmetadata' = countsmetadata, 
+                          'sample_metadata' = sample_metadata))
             }
-          })
-          
-          system('ls $data_path/*1.fastq.gz | cut -d "_" -f1 > $data_path/list')
-          
-          system('if [ !-d $result_path ]; then mkdir $result_path')
-          
-          system('while read sample; do bash $work_dir/Pipeline/rgi_main.sh -s $data_path/$sample
-                 -r $data_path/$fasta_file -t $threads -m $memory -c $comp -d $cont; done < $data_path/list')
-          system('mv $data_path/*_out/*_consolidated_final_arg_counts.txt $result_path/')
-          
-          system('mv $data_path/*_out/*_family_info.txt $result_path/')
-          
-          file_list <- gsub(".txt", "", list.files(result_path)
-                      [grep("\\consolidated_final_arg_counts.txt$", list.files(result_path))])
-          
-          family_info_list <- gsub(".txt", "", list.files(result_path)
-                                   [grep("\\_family_info.txt$", list.files(result_path))])
-          
-          samples_header <- gsub("_consolidated_final_arg_counts","", file_list)
-          
-          sample_metadata <- input_data_reactive()$data
-          
-          family_data_list <- list()
-          
-          for (i in 1:length(family_info_list)){
-            family_data_list[[i]] <- read.delim(file = paste0(result_path,"/",family_info_list[i],".txt"), header = TRUE)
           }
           
-          family_data_list <- lapply(family_data_list, function(x) {
-            x$Classification <- str_replace_all(string=x$Classification, pattern = "_", replacement = " ") 
-            return(x)})
-          sample_data_list <- list()
-          
-          for (i in 1:length(file_list)){
-            sample_data_list[[i]] <- read.delim(file = paste0(result_path,"/",file_list[i],".txt"), header = TRUE)
-          }
-          
-          sample_data_list <- lapply(sample_data_list, function(x){
-            x <- x %>% filter(Percentage_Identity >= 85, Percentage_Identity <= 100)
-            x <- x %>% filter(Percentage_Coverage >= 85, Percentage_Coverage <= 100)
-            return(x)
-          }
-          )
-          
-          sample_data_list <- lapply(sample_data_list, function(x) {
-            x$Drug_Class <- str_replace_all(string = x$Drug_Class,
-                                            pattern = "\\;.*$", replacement = "")
-            
-            x$AMR_Gene_Family <- str_replace_all(string = x$AMR_Gene_Family,
-                                                 pattern = "\\;.*$", replacement = "")
-            
-            x$Resistance_Mechanism <- str_replace_all(string = x$Resistance_Mechanism,
-                                                      pattern = "\\;.*$", replacement = "")
-            return(x)
-          }
-          )
-          
-          for (i in 1:length(sample_data_list))
+          else
           {
-            sample_data_list[[i]]$Sample_Id <- samples_header[i]
+            
+            setwd(input$datadir)
+            
+            system('ls *1.fastq.gz | cut -d "_" -f1 > list')
+            
+            system(paste0("if [ ! -d ", result_path, " ]; then mkdir ", result_path,"; fi"))
+            
+            system(paste0("while read sample; do bash ", work_dir,"/Pipeline/rgi_main.sh -s $sample -r ",
+                          fasta_file, " -t ", input$threads,
+                          " -m ", input$memory, " -c ", input$comp, " -d ", input$cont,
+                          "; done < list"))
+            
+            system(paste0("mv ", input$datadir, "/*_out/*_consolidated_final_arg_counts.txt ",
+                          result_path, "/"))
+            
+            system(paste0("mv ", input$datadir, "/*_out/*_family_info.txt ", result_path, "/"))
+            
+            setwd(work_dir)
+            
+            file_list <- gsub(".txt", "", list.files(result_path)
+                              [grep("\\consolidated_final_arg_counts.txt$", list.files(result_path))])
+            
+            family_info_list <- gsub(".txt", "", list.files(result_path)
+                                     [grep("\\_family_info.txt$", list.files(result_path))])
+            
+            if(!is.null(file_list))
+            {
+              samples_header <- gsub("_consolidated_final_arg_counts","", file_list)
+              
+              sample_metadata <- input_data_reactive()$data
+              
+              family_data_list <- list()
+              
+              for (i in 1:length(family_info_list)){
+                family_data_list[[i]] <- read.delim(file = paste0(result_path,"/",family_info_list[i],".txt"), header = TRUE)
+              }
+              family_data_list <- lapply(family_data_list, function(x) {
+                x$Classification <- str_replace_all(string=x$Classification, pattern = "_", replacement = " ") 
+                return(x)})
+              sample_data_list <- list()
+              
+              for (i in 1:length(file_list)){
+                sample_data_list[[i]] <- read.delim(file = paste0(result_path,"/",file_list[i],".txt"), header = TRUE)
+              }
+              
+              sample_data_list <- lapply(sample_data_list, function(x){
+                x <- x %>% filter(Percentage_Identity >= 85, Percentage_Identity <= 100)
+                x <- x %>% filter(Percentage_Coverage >= 85, Percentage_Coverage <= 100)
+                return(x)
+              }
+              )
+              
+              sample_data_list <- lapply(sample_data_list, function(x) {
+                x$Drug_Class <- str_replace_all(string = x$Drug_Class,
+                                                pattern = "\\;.*$", replacement = "")
+                
+                x$AMR_Gene_Family <- str_replace_all(string = x$AMR_Gene_Family,
+                                                     pattern = "\\;.*$", replacement = "")
+                
+                x$Resistance_Mechanism <- str_replace_all(string = x$Resistance_Mechanism,
+                                                          pattern = "\\;.*$", replacement = "")
+                return(x)
+              }
+              )
+              
+              for (i in 1:length(sample_data_list))
+              {
+                sample_data_list[[i]]$Sample_Id <- samples_header[i]
+              }
+              
+              duplicates_removal <- function(df)
+              {
+                temp <- df %>%
+                  group_by(Sample_Id,Classification,ARO_term) %>%
+                  summarise(Summed_Counts = sum(Counts))
+                
+                temp2 <- subset(df, select = -c(Counts, ARG))
+                
+                df <- inner_join(temp, temp2, 
+                                 by = c("ARO_term","Classification", "Sample_Id"))
+                
+                df <- rename(df, Counts = Summed_Counts)
+                
+                return(df)
+              }
+              
+              
+              sample_data_list <- lapply(sample_data_list, duplicates_removal)
+              
+              gpcm_calculation <- function(df)
+              {
+                df$Normalized_counts <- round(((df$Counts/df$ARG_length)*10^6/
+                                                 sum(df$Counts/df$ARG_length)), digits = 2)
+                return(df)
+              }
+              
+              sample_data_list <- lapply(sample_data_list, gpcm_calculation)
+              
+              for (i in 1:length(samples_header)){
+                
+                sample_data_list[[i]] <- inner_join(sample_data_list[[i]],
+                                                    family_data_list[[i]], by = "Classification")
+                
+              }
+              
+              countsmetadata <- do.call("rbind", sample_data_list)
+              
+              
+              countsmetadata <- inner_join(countsmetadata, sample_metadata,
+                                           by = "Sample_Id")
+              
+              return(list('countsmetadata' = countsmetadata, 
+                          'sample_metadata' = sample_metadata))
+            }
+            
           }
           
-          duplicates_removal <- function(df)
-          {
-            temp <- df %>%
-              group_by(Sample_Id,Classification,ARO_term) %>%
-              summarise(Summed_Counts = sum(Counts))
-            
-            temp2 <- subset(df, select = -c(Counts, ARG))
-            
-            df <- inner_join(temp, temp2, 
-                             by = c("ARO_term","Classification", "Sample_Id"))
-            
-            df <- rename(df, Counts = Summed_Counts)
-            
-            return(df)
           }
-          
-          
-          sample_data_list <- lapply(sample_data_list, duplicates_removal)
-          
-          gpcm_calculation <- function(df)
-          {
-            df$Normalized_counts <- round(((df$Counts/df$ARG_length)*10^6/
-                                             sum(df$Counts/df$ARG_length)), digits = 2)
-            return(df)
-          }
-          
-          sample_data_list <- lapply(sample_data_list, gpcm_calculation)
-          
-          for (i in 1:length(samples_header)){
-            
-            sample_data_list[[i]] <- inner_join(sample_data_list[[i]],
-                                                family_data_list[[i]], by = "Classification")
-            
-          }
-          
-          countsmetadata <- do.call("rbind", sample_data_list)
-          
-          countsmetadata <- inner_join(countsmetadata, sample_metadata, by = "Sample_Id")
-          return(list('countsmetadata' = countsmetadata, 
-                      'sample_metadata' = sample_metadata))
-        }
+      
       else{
+        
         files_path <- input$countdir
+        
         print(files_path)
+        
         file_list <- gsub(".txt", "", list.files(files_path)
                           [grep("\\consolidated_final_arg_counts.txt$", list.files(files_path))])
         
