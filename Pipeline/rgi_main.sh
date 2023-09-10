@@ -111,7 +111,7 @@ gunzip ${sample}_out/${sample}_final_*.fastq.gz
 
 # Assembling the Reads using SPAdes and Binning the Contigs using MetaWRAP
 
-source $path/activate spades 
+source $path/activate base
 
 spades.py -o ${sample}_out/${sample}_spades_out --threads $threads --meta --only-assembler -1 ${sample}_out/${sample}_final_1.fastq -2 ${sample}_out/${sample}_final_2.fastq -s ${sample}_out/${sample}_final_se.fastq -m $mem
 
