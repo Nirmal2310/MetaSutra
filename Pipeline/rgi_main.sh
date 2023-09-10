@@ -103,7 +103,7 @@ source $path/activate bbtools
 
 seal.sh in1=${sample}_out/${sample}_1_trim.fastq.gz in2=${sample}_out/${sample}_2_trim.fastq.gz ref=$ref ambig=all outu1=${sample}_out/${sample}_final_1.fastq.gz outu2=${sample}_out/${sample}_final_2.fastq.gz threads=${threads} -Xmx${mem}g
 
-seal.sh in1=${sample}_out/${sample}_se.fastq.gz ref=$ref ambig=all outu1=${sample}_out/${sample}_final_se.fastq.gz
+seal.sh in1=${sample}_out/${sample}_se.fastq.gz ref=$ref ambig=all outu1=${sample}_out/${sample}_final_se.fastq.gz threads=${threads} -Xmx${mem}g
 
 rm -r ${sample}_out/${sample}_1_trim.fastq.gz ${sample}_out/${sample}_2_trim.fastq.gz ${sample}_out/${sample}_se.fastq.gz
 
