@@ -111,7 +111,7 @@ else
         
         source $path/activate metawrap
         
-        checkm data setRoot ./
+        checkm data setRoot $PWD
         
         source $path/activate base
         
