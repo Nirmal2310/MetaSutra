@@ -42,6 +42,7 @@ else
 fi
 
 docker pull finlaymaguire/rgi:latest
+
 if { conda env list | grep "bwa"; } >/dev/null 2>&1; then
         
         echo "Environment Exist"
@@ -71,13 +72,23 @@ else
 
 fi
 
-if { conda env list | grep "spades"; } >/dev/null 2>&1; then
+if { which spades.py; } >/dev/null 2>&1; then
         
-        echo "Environment Exist"
+        echo "Tool Exist"
 
 else
         
-        conda create --name spades --file spades.txt
+        wget -c http://cab.spbu.ru/files/release3.15.5/SPAdes-3.15.5-Linux.tar.gz
+
+        tar -xvf SPAdes-3.15.5-Linux.tar.gz && rm -r SPAdes-3.15.5-Linux.tar.gz
+        
+        cd SPAdes-3.15.5-Linux
+        
+        echo "export PATH=\"$PWD/bin:\$PATH\"" >> ~/.bashrc
+        
+        source ~/.bashrc
+        
+        cd $base_dir
 
 fi
 
@@ -115,46 +126,10 @@ else
         
         source $path/activate base
         
-        cd ../
-        
-        # Downloading NCBI Nucleotide Data (Required by metaWRAP)
-        
-        mkdir NCBI_nt && cd NCBI_nt 
-        
-        for i in {00..60} 
-        do 
-                
-                wget -c https://ftp.ncbi.nlm.nih.gov/blast/db/nt.$i.tar.gz 
-                
-                tar -xvf nt.$i.tar.gz 
-                
-                rm -r nt.$i.tar.gz
-        
-        done
-        
-        cd ..
-        
-        nt=$PWD/NCBI_nt
-        
-        sed -i "s.BLASTDB=/scratch/gu/NCBI_nt.BLASTDB=$nt.g" $base_dir/metaWRAP/bin/config-metawrap  
-        
-        # Downloading NCBI Taxonomy Data (Required by metaWRAP)
-        
-        mkdir NCBI_tax && cd NCBI_tax 
-        
-        wget ftp://ftp.ncbi.nlm.nih.gov/pub/taxonomy/taxdump.tar.gz
-        
-        tar -xvf *.tar.gz
-        
-        cd ..
-        
-        tax=$PWD/NCBI_tax
-        
-        sed -i "s.TAXDUMP=/scratch/gu/NCBI_tax.TAXDUMP=$tax.g" $base_dir/metaWRAP/bin/config-metawrap
-        
         cd $base_dir
-
+        
 fi
+
 if { conda env list | grep "gtdbtk"; } >/dev/null 2>&1; then
         
         echo "Environment Exist"
@@ -192,43 +167,5 @@ else
         echo "export PATH=\"$PWD/plasmidVerify/:\$PATH\"" >> ~/.bashrc
         
         source ~/.bashrc
-
-fi
-
-if { conda env list | grep "plannotate"; } >/dev/null 2>&1; then
-        
-        echo "Environment Exist"
-
-else
-        
-        git clone --depth 1 --branch master https://github.com/barricklab/pLannotate.git
-        
-        cd pLannotate
-        
-        conda install -y -c conda-forge mamba
-        
-        mamba env create -f environment.yml
-        
-        source $path/activate plannotate
-        
-        conda install -y -c conda-forge streamlit=1.2.0
-        
-        echo "" > requirements.txt
-        
-        pip install . --no-deps -vv
-        
-        plannotate setupdb
-        
-        cd ..
-
-fi
-
-if { conda env list | grep "R-4.2"; } >/dev/null 2>&1; then
-        
-        echo "Environment Exist"
-
-else
-        
-        conda create --name R-4.2 --file R-4.2.txt
 
 fi
