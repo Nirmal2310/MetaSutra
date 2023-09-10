@@ -106,7 +106,9 @@ else
         
         conda create --name metawrap --file metawrap.txt
         
-        mkdir DATA && cd DATA
+        mkdir DATA
+        
+        cd DATA
         
         # Download CHECKM Data (Required by metaWRAP)
         
