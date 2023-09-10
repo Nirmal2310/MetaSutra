@@ -106,13 +106,18 @@ else
         
         conda create --name metawrap --file metawrap.txt
         
-        mkdir DATA
+        if { ! -d DATA }
+        
+                mkdir DATA
+        fi
         
         cd DATA
         
         # Download CHECKM Data (Required by metaWRAP)
-        
-        mkdir CHECKM_DATA
+        if { ! -d CHECKM_DATA }
+                
+                mkdir CHECKM_DATA
+        fi
         
         cd CHECKM_DATA
         
