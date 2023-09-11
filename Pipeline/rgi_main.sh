@@ -129,7 +129,7 @@ metawrap reassemble_bins -o ${sample}_out/${sample}_metawrap_bin_reassemble -1 $
 
 source $path/activate gtdbtk
 
-gtdbtk classify_wf --genome_dir ${sample}_out/${sample}_metawrap_bin_reassemble/reassembled_bins/ --out_dir ${sample}_out/${sample}_gtdbtk_classified --cpus $threads -x fa --prefix ${sample} --pplacer_cpus $threads
+gtdbtk classify_wf --genome_dir ${sample}_out/${sample}_metawrap_bin_reassemble/reassembled_bins/ --out_dir ${sample}_out/${sample}_gtdbtk_classified --cpus $threads -x fa --prefix ${sample} --pplacer_cpus 1 --scratch_dir ${sample}_out
 
 # Manipulating the GTDBTK output to get the least taxonomic level information
 
