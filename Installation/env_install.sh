@@ -149,7 +149,7 @@ else
         
         cd DATA
         
-        if [ ! -d release95 ]
+        if [ ! -d release95 ]; then
                 
                 wget -c --no-check-certificate https://data.gtdb.ecogenomic.org/releases/release95/95.0/auxillary_files/gtdbtk_r95_data.tar.gz
         
