@@ -77,7 +77,7 @@ if [ -f ${sample}*1.fastq.gz ]
 
 else
     
-    echo "Paire-End Fastq File is Missing.";
+    echo "Paired-End Fastq File is Missing.";
 
 fi
 
@@ -164,12 +164,14 @@ awk '{print $2}' ${sample}_out/${sample}_metawrap_bin_reassemble/reassembled_bin
 
 # Running RGI using all the binned contigs
 
-docker run -v $PWD:$PWD --workdir $PWD --rm finlaymaguire/rgi:latest rgi load --card_json $RGI_DB/card.json
+source $path/activate rgi
+
+rgi load --card_json $RGI_DB/card.json --local
 
 while read p
 do 
 
-    docker run -v $PWD:$PWD --workdir $PWD --cpus $threads --rm finlaymaguire/rgi:latest rgi main -n $threads --input_sequence ${sample}_out/${sample}_${p}_bin/$p.fasta --output ${sample}_out/${sample}_${p}_bin/${p}_rgi --input_type contig --clean 
+    rgi main -n $threads --input_sequence ${sample}_out/${sample}_${p}_bin/$p.fasta --output ${sample}_out/${sample}_${p}_bin/${p}_rgi --input_type contig --clean --local
 
 done < "${sample}_out/list"
 
@@ -265,7 +267,9 @@ done < "${sample}_out/${sample}_failed_headers"
 
 mkdir ${sample}_out/${sample}_unclassified_bin
 
-docker run -v $PWD:$PWD --workdir $PWD --cpus $threads --rm finlaymaguire/rgi:latest rgi main -n $threads --input_sequence ${sample}_out/${sample}_unclassified_contigs.fasta --output ${sample}_out/${sample}_unclassified_bin/${sample}_unclassified_rgi --input_type contig --clean
+source $path/activate rgi
+
+rgi main -n $threads --input_sequence ${sample}_out/${sample}_unclassified_contigs.fasta --output ${sample}_out/${sample}_unclassified_bin/${sample}_unclassified_rgi --input_type contig --clean --local
 
 # Getting the Genomic Locations of Respective ARGs from the RGI Output
 
