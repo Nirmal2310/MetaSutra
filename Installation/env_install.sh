@@ -29,7 +29,8 @@ base_dir=$PWD
 
 if [ ! -d localDB ]; then
 
-        unzip localDB.zip && rm -rf localDB.zip
+        unzip localDB.zip 
+        rm -rf localDB.zip
 if
 
 grep -qF "export Pfam_DATA=\"$base_dir\"" ~/.bashrc || echo "export Pfam_DATA=\"$base_dir\"" >> ~/.bashrc
