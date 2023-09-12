@@ -27,6 +27,8 @@ gtdbtk_path=$(which conda | sed "s/\b\/bin\/conda\b//g")
 
 base_dir=$PWD
 
+unzip localDB.zip
+
 grep -qF "export Pfam_DATA=\"$base_dir\"" ~/.bashrc || echo "export Pfam_DATA=\"$base_dir\"" >> ~/.bashrc
 
 grep -qF "export RGI_DB=\"$base_dir/localDB\"" ~/.bashrc || echo "export RGI_DB=\"$base_dir/localDB\"" >> ~/.bashrc
