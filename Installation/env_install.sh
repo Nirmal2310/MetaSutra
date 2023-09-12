@@ -27,9 +27,9 @@ gtdbtk_path=$(which conda | sed "s/\b\/bin\/conda\b//g")
 
 base_dir=$PWD
 
-echo "export Pfam_DATA=\"$base_dir\"" >> ~/.bashrc
+grep -qF "export Pfam_DATA=\"$base_dir\"" ~/.bashrc || echo "export Pfam_DATA=\"$base_dir\"" >> ~/.bashrc
 
-echo "export RGI_DB=\"$base_dir/localDB\"" >> ~/.bashrc
+grep -qF "export RGI_DB=\"$base_dir/localDB\"" ~/.bashrc || echo "export RGI_DB=\"$base_dir/localDB\"" >> ~/.bashrc
 
 source ~/.bashrc
 
@@ -84,7 +84,7 @@ else
         
         cd SPAdes-3.15.5-Linux
         
-        echo "export PATH=\"$PWD/bin:\$PATH\"" >> ~/.bashrc
+        grep -qF "export PATH=\"$PWD/bin:" ~/.bashrc || echo "export PATH=\"$PWD/bin:\$PATH\"" >> ~/.bashrc
         
         source ~/.bashrc
         
@@ -100,7 +100,7 @@ else
         
         git clone https://github.com/bxlab/metaWRAP.git
         
-        echo "export PATH=\"$PWD/metaWRAP/bin/:\$PATH\"" >> ~/.bashrc
+        grep -qF "export PATH=\"$PWD/metaWRAP/bin/:" ~/.bashrc || echo "export PATH=\"$PWD/metaWRAP/bin/:\$PATH\"" >> ~/.bashrc
         
         source ~/.bashrc
         
@@ -125,7 +125,7 @@ else
         
         tar -xvf *.tar.gz
         
-        rm *.gz 
+        rm *.tar.gz* 
         
         source $path/activate metawrap
         
@@ -147,11 +147,14 @@ else
         
         cd DATA
         
-        wget -c --no-check-certificate https://data.gtdb.ecogenomic.org/releases/release95/95.0/auxillary_files/gtdbtk_r95_data.tar.gz
+        if [ ! -d release95 ]
+                
+                wget -c --no-check-certificate https://data.gtdb.ecogenomic.org/releases/release95/95.0/auxillary_files/gtdbtk_r95_data.tar.gz
         
-        tar -xvf gtdbtk_r95_data.tar.gz 
+                tar -xvf gtdbtk_r95_data.tar.gz 
         
-        rm -rf *.tar.gz
+                rm -rf *.tar.gz*
+        fi
         
         cd release95
         
