@@ -27,7 +27,10 @@ gtdbtk_path=$(which conda | sed "s/\b\/bin\/conda\b//g")
 
 base_dir=$PWD
 
-unzip localDB.zip
+if [ ! -d localDB ]; then
+
+        unzip localDB.zip && rm -rf localDB.zip
+if
 
 grep -qF "export Pfam_DATA=\"$base_dir\"" ~/.bashrc || echo "export Pfam_DATA=\"$base_dir\"" >> ~/.bashrc
 
@@ -43,7 +46,15 @@ else
         gunzip Pfam-A.hmm.gz
 fi
 
-docker pull finlaymaguire/rgi:latest
+if { conda env list |  grep "rgi"; } > /dev/null 2>&1; then
+
+        echo "Environment Exist"
+
+else
+
+        conda create --name rgi --file rgi.txt
+
+fi
 
 if { conda env list | grep "bwa"; } >/dev/null 2>&1; then
         
