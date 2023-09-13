@@ -86,12 +86,24 @@ else
 
 fi
 
-if { conda env list | grep "spades"; } >/dev/null 2>&1; then
+if { which spades.py; } >/dev/null 2>&1; then
         
-        echo "Environment Exist"
+        echo "SPAdes Exist"
+
+        source ~/.bashrc
 
 else
-        conda create --name spades --file spades.txt
+        wget -c http://cab.spbu.ru/files/release3.15.5/SPAdes-3.15.5-Linux.tar.gz
+
+        tar -xvf SPAdes-3.15.5-Linux.tar.gz && rm -r SPAdes-3.15.5-Linux.tar.gz
+
+        cd SPAdes-3.15.5-Linux
+
+        grep -qF "export PATH=\"$PWD/bin:" ~/.bashrc || echo "export PATH=\"$PWD/bin:\$PATH\"" >> ~/.bashrc
+
+        source ~/.bashrc
+
+        cd $base_dir
 
 fi
 
