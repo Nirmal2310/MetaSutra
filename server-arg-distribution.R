@@ -136,9 +136,10 @@ arg_distribution_analysis <- reactive({
                 cluster_rows = arg_row_dend,
                 cluster_columns = arg_col_dend,
                 show_column_names = TRUE,
-                show_row_names = TRUE)
+                show_row_names = TRUE,
+                column_names_rot = -45)
         
-        return(abundance_plot)
+        return(as_ggplot(grid.grabExpr(print(abundance_plot))))
     }
     
     return(list(control_richness_plot = fun_richness_plot(data, "Control"),
