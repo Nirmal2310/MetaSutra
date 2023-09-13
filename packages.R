@@ -1,5 +1,5 @@
 required = c("shiny", "shinyFiles", "markdown", "shinyBS", "validate", "tidyverse",
-             "stringr", "ggpubr", "dendextend", "ComplexHeatmap", "vegan", "grid",
+             "stringr", "ggpubr", "dendextend", "BiocManager", "vegan", "grid",
              "ggforce")
 sapply(required, function(x){
   if(!require(x, character.only = TRUE)){
@@ -8,17 +8,8 @@ sapply(required, function(x){
   }
 )
 
-
-# library(shiny)
-# library(shinyFiles)
-# library(markdown)
-# library(shinyBS)
-# library(validate)
-# library(tidyverse)
-# library(stringr)
-# library(ggpubr)
-# library(dendextend)
-# library(ComplexHeatmap)
-# library(vegan)
-# library(grid)
-# library(ggforce)
+if(!require("ComplexHeatmap", character.only = TRUE)){
+  install.packages("ComplexHeatmap"); library("ComplexHeatmap", character.only = TRUE)
+}else{
+  library("ComplexHeatmap", character.only = TRUE)
+}
