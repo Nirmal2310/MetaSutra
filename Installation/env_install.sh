@@ -31,7 +31,7 @@ if [ ! -d localDB ]; then
 
         unzip localDB.zip 
         rm -rf localDB.zip
-if
+fi
 
 grep -qF "export Pfam_DATA=\"$base_dir\"" ~/.bashrc || echo "export Pfam_DATA=\"$base_dir\"" >> ~/.bashrc
 
