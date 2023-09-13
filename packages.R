@@ -9,7 +9,7 @@ sapply(required, function(x){
 )
 
 if(!require("ComplexHeatmap", character.only = TRUE)){
-  install.packages("ComplexHeatmap"); library("ComplexHeatmap", character.only = TRUE)
+  BiocManager::install("ComplexHeatmap"); library("ComplexHeatmap", character.only = TRUE)
 }else{
   library("ComplexHeatmap", character.only = TRUE)
 }
