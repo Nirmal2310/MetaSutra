@@ -236,7 +236,10 @@ do
 
     sed -i "$ d" ${sample}_out/${sample}_${i}_bin/temp
 
-    while read line; do echo "$i" | sed 's/_/ /g' > ${sample}_out/${sample}_${i}_bin/temp2; done < "${sample}_out/${sample}_${i}_bin/temp"
+    while read line
+    do 
+    	echo "$i" | sed 's/_/ /g' > ${sample}_out/${sample}_${i}_bin/temp2 
+    done < "${sample}_out/${sample}_${i}_bin/temp"
     
     awk 'BEGIN{FS="\t";OFS="\t"}{if(NR>1) print $9,$10,$15,$16,$17,$21}' ${sample}_out/${sample}_${i}_bin/${i}_rgi.txt | paste -d "\t" ${sample}_out/${sample}_${i}_bin/temp - ${sample}_out/${sample}_${i}_bin/temp2 > ${sample}_out/${sample}_${i}_bin/${i}_arg_counts.txt
     
