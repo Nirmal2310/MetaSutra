@@ -238,7 +238,7 @@ do
 
     while read line
     do 
-    	echo "$i" | sed 's/_/ /g' > ${sample}_out/${sample}_${i}_bin/temp2 
+    	echo "$i" | sed 's/_/ /g' >> ${sample}_out/${sample}_${i}_bin/temp2 
     
     done < "${sample}_out/${sample}_${i}_bin/temp"
     
