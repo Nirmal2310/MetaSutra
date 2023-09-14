@@ -239,6 +239,7 @@ do
     while read line
     do 
     	echo "$i" | sed 's/_/ /g' > ${sample}_out/${sample}_${i}_bin/temp2 
+    
     done < "${sample}_out/${sample}_${i}_bin/temp"
     
     awk 'BEGIN{FS="\t";OFS="\t"}{if(NR>1) print $9,$10,$15,$16,$17,$21}' ${sample}_out/${sample}_${i}_bin/${i}_rgi.txt | paste -d "\t" ${sample}_out/${sample}_${i}_bin/temp - ${sample}_out/${sample}_${i}_bin/temp2 > ${sample}_out/${sample}_${i}_bin/${i}_arg_counts.txt
@@ -329,4 +330,5 @@ sed -i "$ d" ${sample}_out/${sample}_unclassified_arg_counts.txt
 rm -r ${sample}_out/${sample}_unclassified_bin/temp*
 
 echo -e "ARG\tARG_length\tCounts\tARO_term\tPercentage_Identity\tDrug_Class\tResistance_Mechanism\tAMR_Gene_Family\tPercentage_Coverage\tClassification" | cat - ${sample}_out/${sample}_binned_final_arg_counts.txt ${sample}_out/${sample}_unclassified_arg_counts.txt > ${sample}_out/${sample}_consolidated_final_arg_counts.txt
+
 source $path/activate base
