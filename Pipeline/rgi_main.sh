@@ -244,8 +244,6 @@ do
     
     awk 'BEGIN{FS="\t";OFS="\t"}{if(NR>1) print $9,$10,$15,$16,$17,$21}' ${sample}_out/${sample}_${i}_bin/${i}_rgi.txt | paste -d "\t" ${sample}_out/${sample}_${i}_bin/temp - ${sample}_out/${sample}_${i}_bin/temp2 > ${sample}_out/${sample}_${i}_bin/${i}_arg_counts.txt
     
-    sed -i "$ d" ${sample}_out/${sample}_${i}_bin/${i}_arg_counts.txt
-    
     rm -r ${sample}_out/${sample}_${i}_bin/temp* 
 
 done < "${sample}_out/list"
@@ -324,8 +322,6 @@ do
 done < "${sample}_out/${sample}_unclassified_bin/temp"
 
 awk 'BEGIN{FS="\t";OFS="\t"}{if(NR>1) print $9,$10,$15,$16,$17,$21}' ${sample}_out/${sample}_unclassified_bin/${sample}_unclassified_rgi.txt | paste -d "\t" ${sample}_out/${sample}_unclassified_bin/temp - ${sample}_out/${sample}_unclassified_bin/temp2 > ${sample}_out/${sample}_unclassified_arg_counts.txt
-
-sed -i "$ d" ${sample}_out/${sample}_unclassified_arg_counts.txt
 
 rm -r ${sample}_out/${sample}_unclassified_bin/temp*
 
