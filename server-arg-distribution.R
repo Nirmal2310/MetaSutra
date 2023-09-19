@@ -94,12 +94,14 @@ arg_distribution_analysis <- reactive({
                     axis.text = element_blank(),
                     axis.title = element_blank(),
                     panel.grid = element_blank(),
-                    plot.margin = unit(rep(-1, 4), "cm")
+                    plot.margin = unit(rep(-1, 4), "cm"),
+                    legend.text = element_text(size = 12, face = "bold"),
+                    legend.title = element_text(size = 12, face = "bold")
                 ) +
         coord_polar() +
         geom_text(data = label_data, aes(x = id, y = ARG_Richness + 5, label = Classification, 
                     hjust = hjust), color = "black", fontface = "bold",
-                    alpha = 0.6, size = 2.5, angle = label_data$angle, inherit.aes = FALSE ) +
+                    alpha = 0.6, size = 3.5, angle = label_data$angle, inherit.aes = FALSE ) +
         geom_text(x = max(data_2$id+0.45), y = y_data_richness[5] + 10, label = "ARG Richness", 
                 color = "black", size = 3.5, angle = 0, fontface = "bold", hjust = 1) +
         ggtitle(paste0("ARGs Richness Plot for ", treatment, " Samples"))
@@ -132,12 +134,13 @@ arg_distribution_analysis <- reactive({
         arg_col_dend <- hclust(dist(data_3), method = "complete")
         
         abundance_plot <- Heatmap(t(data_3), name = "Abundance",
-                row_names_gp = gpar(fontsize = 6.5),
+                row_names_gp = gpar(fontsize = 10, fontface = "bold"),
                 cluster_rows = arg_row_dend,
                 cluster_columns = arg_col_dend,
                 show_column_names = TRUE,
                 show_row_names = TRUE,
-                column_names_rot = -45)
+                column_names_rot = -45,
+                column_names_gp = gpar(fontsize = 10))
         
         return(as_ggplot(grid.grabExpr(print(abundance_plot))))
     }

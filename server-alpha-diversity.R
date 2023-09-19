@@ -26,13 +26,13 @@ alpha_diversity_analysis <- reactive({
           guides(color = guide_legend(title = "Groups", title.position = "top")) +
           facet_wrap(~ Diversity) +
           theme(
-            axis.title.x = element_text(size = 14),
-            axis.title.y = element_text(size = 14),
-            strip.text.x = element_text(size = 14),
-            axis.text.y = element_text(size = 14),
-            axis.text.x = element_text(size = 14),
-            legend.title = element_text(colour = "black",size = 10),
-            legend.text = element_text(colour = "black", size = 10),
+            axis.title.x = element_text(size = 14, face = "bold"),
+            axis.title.y = element_text(size = 14, face = "bold"),
+            strip.text.x = element_text(size = 14, face = "bold"),
+            axis.text.y = element_text(size = 14, face = "bold"),
+            axis.text.x = element_text(size = 14, face = "bold"),
+            legend.title = element_text(colour = "black",size = 10, face = "bold"),
+            legend.text = element_text(colour = "black", size = 10, face = "bold"),
             plot.title = element_text(hjust = 0.5, size = rel(2)))
         return(diversity_facet)
     }
@@ -55,7 +55,15 @@ alpha_diversity_analysis <- reactive({
           scale_color_manual(values = c("#ffbf00", "#746AB0")) +
           theme_light() +
           xlab("Group") +
-          ylab("Log2(Counts)")
+          ylab("Log2(Counts)") +
+          theme(
+            axis.title.x = element_text(size = 15, face = "bold"),
+            axis.text.x = element_text(size = 12, face = "bold"),
+            axis.title.y = element_text(size = 15, face = "bold"),
+            axis.text.y = element_text(size = 12, face = "bold"),
+            legend.title = element_text(colour = "black",size = 10),
+            legend.text = element_text(colour = "black", size = 10)
+          )
         return(abundance_plot)
     }
     return(list(diversity_plot = fun_diversity_plot(data),

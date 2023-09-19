@@ -469,17 +469,28 @@ analyze_data_reactive <-
         family_data_list <- list()
         
         for (i in 1:length(family_info_list)){
-          family_data_list[[i]] <- read.delim(file = paste0(files_path,"/",family_info_list[i],".txt"), header = TRUE)
+          family_data_list[[i]] <- read.delim(file = paste0(files_path,"/",family_info_list[i],".txt"),
+                                              header = TRUE)
         }
         
         family_data_list <- lapply(family_data_list, function(x) {
-          x$Classification <- str_replace_all(string=x$Classification, pattern = "_", replacement = " ") 
+          x$Classification <- str_replace_all(string=x$Classification,
+                                              pattern = "_", replacement = " ") 
           return(x)})
+        
+        print(family_data_list[[1]])
+        
         sample_data_list <- list()
         
         for (i in 1:length(file_list)){
-          sample_data_list[[i]] <- read.delim(file = paste0(files_path,"/",file_list[i],".txt"), header = TRUE)
+          sample_data_list[[i]] <- read.delim(file = paste0(files_path,"/",file_list[i],".txt"),
+                                              header = TRUE)
+          
+          print(file_list[i])
+          
         }
+        
+        
         
         sample_data_list <- lapply(sample_data_list, function(x){
           x <- x %>% filter(Percentage_Identity >= 85, Percentage_Identity <= 100)
@@ -487,6 +498,8 @@ analyze_data_reactive <-
           return(x)
         }
         )
+        
+        print("1 Works!!")
         
         sample_data_list <- lapply(sample_data_list, function(x) {
           x$Drug_Class <- str_replace_all(string = x$Drug_Class,
@@ -501,10 +514,13 @@ analyze_data_reactive <-
         }
         )
         
+        print("2 Works!!")
         for (i in 1:length(sample_data_list))
         {
           sample_data_list[[i]]$Sample_Id <- samples_header[i]
         }
+        
+        print("3 Works!!")
         
         duplicates_removal <- function(df)
         {
@@ -522,6 +538,7 @@ analyze_data_reactive <-
           return(df)
         }
         
+        print("4 Works!!")
         
         sample_data_list <- lapply(sample_data_list, duplicates_removal)
         
@@ -534,6 +551,8 @@ analyze_data_reactive <-
         
         sample_data_list <- lapply(sample_data_list, gpcm_calculation)
         
+        print("5 Works!!")
+        
         for (i in 1:length(samples_header)){
           
           sample_data_list[[i]] <- inner_join(sample_data_list[[i]],
@@ -541,7 +560,11 @@ analyze_data_reactive <-
           
         }
         
+        print("6 Works!!")
+        
         countsmetadata <- do.call("rbind", sample_data_list)
+        
+        print("7 works!!")
         
         countsmetadata <- inner_join(countsmetadata, sample_metadata, by = "Sample_Id")
         return(list('countsmetadata' = countsmetadata, 

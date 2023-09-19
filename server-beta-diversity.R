@@ -38,7 +38,7 @@ beta_diversity_analysis <- reactive({
         column_dend <- hclust(dist(data_4), method = "complete")
         
         heatmap_plot <- Heatmap(t(data_4), name = "Log2Counts",
-                                row_names_gp = gpar(fontsize = 6.5),
+                                row_names_gp = gpar(fontsize = 10, fontface = "bold"),
                                 cluster_rows = color_branches(row_dend),
                                 cluster_columns = color_branches(column_dend),
                                 show_column_names = FALSE,
@@ -72,7 +72,15 @@ beta_diversity_analysis <- reactive({
                             linetype = 2) +
           xlab(paste0("PC1 (", pca.var.per[1], "%", ")")) +
           ylab(paste0("PC2 (", pca.var.per[2], "%", ")")) +
-          theme_bw()
+          theme_bw() +
+          theme(
+            axis.text.x = element_text(size = 12, face = "bold"),
+            axis.text.y = element_text(size = 12, face = "bold"),
+            legend.text = element_text(size = 12, face = "bold"),
+            axis.title.x = element_text(size = 12, face = "bold"),
+            axis.title.y = element_text(size = 12, face = "bold"),
+            legend.title = element_text(size = 12, face = "bold")
+          )
         return(pca_plot)
     }
     return(list(heatmap_plot = fun_heatmap_plot(data, sample_metadata),

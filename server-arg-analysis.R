@@ -14,7 +14,13 @@ arg_analysis_plots <- reactive({
         coord_flip() +
         theme_minimal() +
         ylab("Total ARG Abundance") +
-        xlab("Drug Class")
+        xlab("Drug Class") +
+      theme(
+        axis.title.x = element_text(size = 15, face = "bold"),
+        axis.text.x = element_text(size = 12, face = "bold"),
+        axis.title.y = element_text(size = 15, face = "bold"),
+        axis.text.y = element_text(size = 12, face = "bold")
+      )
     return(drug_class_barplot)
     }
     fun_resistance_plot <- function(data) {
@@ -27,7 +33,10 @@ arg_analysis_plots <- reactive({
                                     fill = "Resistance_Mechanism", 
                                     color = "white" ) +
       theme(legend.position = "left") +
-      theme(plot.title = element_blank(), plot.subtitle = element_blank()) +
+      theme(plot.title = element_blank(), plot.subtitle = element_blank(),
+            axis.text.x = element_text(size = 12, face = "bold"),
+            legend.text = element_text(size = 12, face = "bold"),
+            legend.title = element_text(size = 12, face = "bold")) +
       scale_fill_discrete(name = "Resistance Mechanism")
     return(resistance_plot)
     }

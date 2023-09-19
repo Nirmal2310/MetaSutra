@@ -22,7 +22,7 @@ tabPanel(
                                   column(
                                     width=3,
                                     downloadButton(outputId = "case_download_circular_richness_plot",
-                                                          label = "Download Case Richness Plot(PNG")
+                                                          label = "Download Case Richness Plot(PNG)")
                                   ),
                                   column(
                                     width=9,
