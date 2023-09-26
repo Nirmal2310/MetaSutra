@@ -166,10 +166,10 @@ observeEvent(input$upload_data, {
       )
     
     output$plot_control_abundance_heatmap <- renderPlot({
-        plots_data$control_abundance_plot}, height = 500
+        plots_data$control_abundance_plot}, height = 800
         )
     output$plot_case_abundance_heatmap <- renderPlot({
-      plots_data$case_abundance_plot}, height = 500
+      plots_data$case_abundance_plot}, height = 800
       )
     
     output$control_download_circular_richness_plot <- downloadHandler(
