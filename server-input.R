@@ -628,7 +628,7 @@ output$download_results_CSV <- downloadHandler(
   
   content = function(file) {
     
-    write.csv(analyze_data_reactive()$data_results_table,
+    write.csv(analyze_data_reactive()$countsmetadata,
     
     file, row.names = FALSE)
   }
