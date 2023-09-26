@@ -90,10 +90,10 @@ observeEvent(input$upload_data, {
     beta_diversity_plots <- beta_diversity_analysis()
 
     output$plot_heatmap <- renderPlot({
-      beta_diversity_plots$heatmap_plot}, height = 500)
+      beta_diversity_plots$heatmap_plot}, height = 700)
 
     output$plot_pca <- renderPlot({
-      beta_diversity_plots$pca_plot}, height = 500)
+      beta_diversity_plots$pca_plot}, height = 700)
 
     output$download_heatmap <- downloadHandler(
         filename = function() {
