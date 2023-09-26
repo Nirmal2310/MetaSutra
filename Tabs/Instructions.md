@@ -13,7 +13,7 @@ output:
 
 <img src="Drug_class.png" alt="Drug Class vs. ARG Abundance" style="width: 30%"/>
 <img src="Resistance_mechanism.png" alt="Resistance Mechanism" style="width: 30%"/>
-<img src="ARG_cohort_richness.png" alt="Cohort ARG Richness" style="width: 30%"/>
+<img src="ARG_Cohort_Richness.png" alt="Cohort ARG Richness" style="width: 30%"/>
 <img src="ARG_Cohort_Abundance.png" alt="Cohort ARG Abundance" style="width: 30%"/>
 <img src="Alpha_diversity.png" alt="Alpha Diversity" style="width: 40%"/>
 <img src="Abundance_Kruskal_Walis.png" alt="Abundance Comparison" style="width: 15%"/>
