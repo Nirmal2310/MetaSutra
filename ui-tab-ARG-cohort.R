@@ -4,13 +4,13 @@ tabPanel(
                 tabPanel(title = "ARGs vs Drug Class",
                                   downloadButton(outputId = "download_drug_class_barplot",
                                                  label = "Download Bar Plot (PNG)"),
-                                  plotOutput("plot_drug_class_barplot")
+                                  plotOutput("plot_drug_class_barplot", height = "auto", width = "auto")
                          
                          ),
                 tabPanel(title = "Resistance Mechanisms of ARGs",
                                   downloadButton(outputId = "download_resistance_plot",
                                                  label = "Download Donut Plot (PNG)"),
-                                  plotOutput("plot_resistance_plot")
+                                  plotOutput("plot_resistance_plot", height = "auto", width = "auto")
               )
   )
 )
