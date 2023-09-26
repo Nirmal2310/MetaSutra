@@ -104,11 +104,11 @@ alpha_diversity_analysis <- reactive({
 observeEvent(input$upload_data, {
     plots_data <- alpha_diversity_analysis()
     output$plot_alpha_diversity <- renderPlot({
-      plots_data$diversity_plot},height = 500
+      plots_data$diversity_plot},height = 700
     )
     
   output$plot_abundance <- renderPlot({
-        plots_data$abundance_plot}, height = 500)
+        plots_data$abundance_plot}, height = 700)
 
     output$download_alpha_diversity_plot <- downloadHandler(
         filename = function() {
