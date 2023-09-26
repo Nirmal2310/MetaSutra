@@ -90,12 +90,10 @@ observeEvent(input$upload_data, {
     beta_diversity_plots <- beta_diversity_analysis()
 
     output$plot_heatmap <- renderPlot({
-      beta_diversity_plots$heatmap_plot}, height = 500
-      )
+      beta_diversity_plots$heatmap_plot}, height = 500)
 
     output$plot_pca <- renderPlot({
-      beta_diversity_plots$pca_plot}, height = 500
-      )
+      beta_diversity_plots$pca_plot}, height = 500)
 
     output$download_heatmap <- downloadHandler(
         filename = function() {
@@ -103,7 +101,7 @@ observeEvent(input$upload_data, {
         },
         content = function(file) {
             ggsave(file, beta_diversity_plots$heatmap_plot,
-                   width = 11.27, height = 14.69, units = "in", dpi = "retina")
+                   width = 14.69, height = 8.27, units = "in", dpi = "retina")
         }
     )
 

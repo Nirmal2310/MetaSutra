@@ -1,6 +1,6 @@
 required = c("shiny", "shinyFiles", "markdown", "shinyBS", "validate", "tidyverse",
              "stringr", "ggpubr", "dendextend", "BiocManager", "vegan", "grid",
-             "ggforce")
+             "ggforce", "gridExtra")
 sapply(required, function(x){
   if(!require(x, character.only = TRUE)){
     install.packages(x); library(x,  character.only = TRUE)}

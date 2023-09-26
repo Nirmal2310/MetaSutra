@@ -94,10 +94,12 @@ arg_distribution_analysis <- reactive({
                     axis.text = element_blank(),
                     axis.title = element_blank(),
                     panel.grid = element_blank(),
-                    plot.margin = unit(rep(-1, 4), "cm"),
+                    # plot.margin = unit(rep(-1, 4), "cm"),
                     legend.text = element_text(size = 12, face = "bold"),
-                    legend.title = element_text(size = 12, face = "bold")
-                ) +
+                    legend.title = element_text(size = 12, face = "bold"),
+                    plot.title = element_text(family = "sans", size = 18,
+                                              face = "bold", hjust = 0.5,
+                                              margin = margin(0,0,-10,0))) +
         coord_polar() +
         geom_text(data = label_data, aes(x = id, y = ARG_Richness + 5, label = Classification, 
                     hjust = hjust), color = "black", fontface = "bold",
@@ -140,7 +142,7 @@ arg_distribution_analysis <- reactive({
                 show_column_names = TRUE,
                 show_row_names = TRUE,
                 column_names_rot = -45,
-                column_names_gp = gpar(fontsize = 10))
+                column_names_gp = gpar(fontsize = 7, fontface = "bold"))
         
         return(as_ggplot(grid.grabExpr(print(abundance_plot))))
     }
@@ -157,10 +159,10 @@ observeEvent(input$upload_data, {
     plots_data <- arg_distribution_analysis()
     
     output$plot_control_circular_richness_plot <- renderPlot({
-        plots_data$control_richness_plot}, width = 800, height = 500
+        plots_data$control_richness_plot}, height = 1000
         )
     output$plot_case_circular_richness_plot <- renderPlot({
-      plots_data$case_richness_plot}, width = 800, height = 500
+      plots_data$case_richness_plot}, height = 1000
       )
     
     output$plot_control_abundance_heatmap <- renderPlot({
@@ -176,7 +178,7 @@ observeEvent(input$upload_data, {
             Sys.Date(), ".png", sep = "")
         },
         content = function(file) {
-            ggsave(file, plots_data$control_richness_plot, width = 8.27, height = 11.69,
+            ggsave(file, plots_data$control_richness_plot, width = 12.27, height = 11.69,
                    units = "in", dpi = "retina")
         }
     )
@@ -187,7 +189,7 @@ observeEvent(input$upload_data, {
               Sys.Date(), ".png", sep = "")
       },
       content = function(file) {
-        ggsave(file, plots_data$case_richness_plot, width = 8.27, height = 11.69,
+        ggsave(file, plots_data$case_richness_plot, width = 12.27, height = 11.69,
                units = "in", dpi = "retina")
       }
     )
@@ -198,7 +200,7 @@ observeEvent(input$upload_data, {
             Sys.Date(), ".png", sep = "")
         },
         content = function(file) {
-            ggsave(file, plots_data$control_abundance_plot, width = 26, height = 31,
+            ggsave(file, plots_data$control_abundance_plot, width = 20, height = 10,
                    units = "in", dpi = "retina")
         }
     )
@@ -209,7 +211,7 @@ observeEvent(input$upload_data, {
               Sys.Date(), ".png", sep = "")
       },
       content = function(file) {
-        ggsave(file, plots_data$case_abundance_plot, width = 26, height = 31,
+        ggsave(file, plots_data$case_abundance_plot, width = 30, height = 15,
                units = "in", dpi = "retina")
       }
     )

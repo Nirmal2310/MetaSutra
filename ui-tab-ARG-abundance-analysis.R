@@ -3,32 +3,15 @@ tabPanel(
               tabPanel(title = "ARGs Richness",
                        tabsetPanel(id="Richness_per_group",
                          tabPanel(title = "Control Richness",
-                                  fluidRow(
-                                    column(
-                                      width=3,
-                                      downloadButton(outputId = "control_download_circular_richness_plot",
-                                                     label = "Download Control Richness Plot (PNG)")
-                                    ),
-                                    column(
-                                      width = 9,
-                                      plotOutput("plot_control_circular_richness_plot")
-                                    )
-                                  )
-                         
-                         
-                       ),
-                       tabPanel(title = "Case Richness",
-                                fluidRow(
-                                  column(
-                                    width=3,
-                                    downloadButton(outputId = "case_download_circular_richness_plot",
-                                                          label = "Download Case Richness Plot(PNG)")
+                                  downloadButton(outputId = "control_download_circular_richness_plot",
+                                                 label = "Download Control Richness Plot (PNG)"),
+                                  plotOutput("plot_control_circular_richness_plot", height = "100%")
+                                    
                                   ),
-                                  column(
-                                    width=9,
-                                    plotOutput("plot_case_circular_richness_plot")
-                                  )
-                                )
+                         tabPanel(title = "Case Richness",
+                                  downloadButton(outputId = "case_download_circular_richness_plot",
+                                                 label = "Download Case Richness Plot(PNG)"),
+                                  plotOutput("plot_case_circular_richness_plot", height = "100%")
                                 )
                        )
                        ),
@@ -37,16 +20,15 @@ tabPanel(
                                    tabPanel(title = "Control Abundance",
                                             downloadButton(outputId = "download_control_abundance_heatmap",
                                                            label = "Download Control Abundance HeatMap (PNG)"),
-                                            plotOutput("plot_control_abundance_heatmap")
+                                            plotOutput("plot_control_abundance_heatmap", height = "150%", width = "100%")
                                               
                                             ),
                                    tabPanel(title = "Case Abundance",
                                             downloadButton(outputId = "download_case_abundance_heatmap",
                                                            label = "Download Case Abundance HeatMap (PNG)"),
-                                            plotOutput("plot_case_abundance_heatmap")
-                                                
-                                              
-                                                     ))
+                                            plotOutput("plot_case_abundance_heatmap", height = "150%", width = "100%")
+                                            )
+                                   )
+                       )
               )
   )
-)

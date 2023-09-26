@@ -16,15 +16,20 @@ alpha_diversity_analysis <- reactive({
                                 levels = c("Control", "Case"))
         diversity_data <- pivot_longer(diversity_data, cols = c(Shannon, Simpson),
                                         names_to = "Diversity", values_to = "Value")
+        alpha_div_p <- compare_means(Value ~ Group, data = diversity_data,
+                                     method = "wilcox", p.adjust.method = "holm",
+                                     group.by = "Diversity")
 
-        diversity_facet <- ggplot(diversity_data, aes(x = Group, y = Value, color = Group)) +
+        shannon_plot <- diversity_data %>% filter(Diversity == "Shannon") %>% 
+          ggplot(aes(x = Group, y = Value, color = Group)) +
           geom_boxplot() +
           geom_jitter(shape = 16, position = position_jitter(0.2)) +
           scale_color_manual(values = c("#ffbf00", "#746AB0")) +
           theme_light() +
           labs(y = "ARGs diversity", x = "") +
-          guides(color = guide_legend(title = "Groups", title.position = "top")) +
-          facet_wrap(~ Diversity) +
+          stat_pvalue_manual(subset(alpha_div_p, Diversity=="Shannon"), y.position = max(
+            subset(diversity_data, Diversity=="Shannon")$Value) + 0.1, label = "p.adj") +
+          guides(color = guide_legend(title = "Shannon", title.position = "top")) +
           theme(
             axis.title.x = element_text(size = 14, face = "bold"),
             axis.title.y = element_text(size = 14, face = "bold"),
@@ -34,6 +39,31 @@ alpha_diversity_analysis <- reactive({
             legend.title = element_text(colour = "black",size = 10, face = "bold"),
             legend.text = element_text(colour = "black", size = 10, face = "bold"),
             plot.title = element_text(hjust = 0.5, size = rel(2)))
+        
+        simpson_plot <- diversity_data %>% filter(Diversity == "Simpson") %>% 
+          ggplot(aes(x = Group, y = Value, color = Group)) +
+          geom_boxplot() +
+          geom_jitter(shape = 16, position = position_jitter(0.2)) +
+          scale_color_manual(values = c("#ffbf00", "#746AB0")) +
+          theme_light() +
+          labs(y = "ARGs diversity", x = "") +
+          stat_pvalue_manual(subset(alpha_div_p, Diversity=="Simpson"), y.position = max(
+            subset(diversity_data, Diversity=="Simpson")$Value) + 0.01, label = "p.adj") +
+          guides(color = guide_legend(title = "Simpson", title.position = "top")) +
+          theme(
+            axis.title.x = element_text(size = 14, face = "bold"),
+            axis.title.y = element_text(size = 14, face = "bold"),
+            strip.text.x = element_text(size = 14, face = "bold"),
+            axis.text.y = element_text(size = 14, face = "bold"),
+            axis.text.x = element_text(size = 14, face = "bold"),
+            legend.title = element_text(colour = "black",size = 10, face = "bold"),
+            legend.text = element_text(colour = "black", size = 10, face = "bold"),
+            plot.title = element_text(hjust = 0.5, size = rel(2)))
+        
+        diversity_facet <- as_ggplot(grid.grabExpr(grid.arrange(shannon_plot,
+                                                                      simpson_plot,
+                                                                      ncol = 2)))
+        
         return(diversity_facet)
     }
     fun_abundance_plot <- function(data)
@@ -47,19 +77,21 @@ alpha_diversity_analysis <- reactive({
         abundance_data$Group <- factor(abundance_data$Group,
                                     levels = c("Control", "Case"))
         abundance_data <- subset(abundance_data, select = -Sample_Id)
+        abundance_p_value <- compare_means(Counts~Group, data = abundance_data, method = "wilcox",
+                                           p.adjust.method = "holm")
         abundance_plot <- ggplot(abundance_data, aes(x = Group, y = log2(Counts), color = Group)) +
           geom_boxplot() +
-          stat_compare_means(comparisons = list(c("Control", "Case"))) +
-          stat_summary(fun = mean, geom = "point", shape = 9, size = 2) +
+          stat_pvalue_manual(abundance_p_value, y.position = max(log2(abundance_data$Counts)) + 0.5,
+                             label = "p.signif") +
           geom_jitter(shape = 16, position = position_jitter(0.2)) +
           scale_color_manual(values = c("#ffbf00", "#746AB0")) +
           theme_light() +
           xlab("Group") +
           ylab("Log2(Counts)") +
           theme(
-            axis.title.x = element_text(size = 15, face = "bold"),
+            axis.title.x = element_text(size = 12, face = "bold"),
             axis.text.x = element_text(size = 12, face = "bold"),
-            axis.title.y = element_text(size = 15, face = "bold"),
+            axis.title.y = element_text(size = 12, face = "bold"),
             axis.text.y = element_text(size = 12, face = "bold"),
             legend.title = element_text(colour = "black",size = 10),
             legend.text = element_text(colour = "black", size = 10)
@@ -72,19 +104,18 @@ alpha_diversity_analysis <- reactive({
 observeEvent(input$upload_data, {
     plots_data <- alpha_diversity_analysis()
     output$plot_alpha_diversity <- renderPlot({
-        plots_data$diversity_plot},height = 500
-        )
-
-    output$plot_abundance <- renderPlot({
-        plots_data$abundance_plot}, height = 500
-        )
+      plots_data$diversity_plot},height = 500
+    )
+    
+  output$plot_abundance <- renderPlot({
+        plots_data$abundance_plot}, height = 500)
 
     output$download_alpha_diversity_plot <- downloadHandler(
         filename = function() {
             paste("Alpha_diversity_plot_", Sys.Date(), ".png", sep = "")
         },
         content = function(file) {
-            ggsave(file, plots_data$diversity_plot, width = 6.07, height = 3.96, units = "in", dpi = "retina")
+            ggsave(file, plots_data$diversity_plot, width = 10.07, height = 3.96, units = "in", dpi = "retina")
         }
     )
 
@@ -93,7 +124,7 @@ observeEvent(input$upload_data, {
             paste("Abundance_plot_", Sys.Date(), ".png", sep = "")
         },
         content = function(file) {
-            ggsave(file, plots_data$abundance_plot, width = 6.07, height = 3.96, units = "in", dpi = "retina")
+            ggsave(file, plots_data$abundance_plot, width = 4, height = 3.96, units = "in", dpi = "retina")
         }
     )
 })

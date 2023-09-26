@@ -60,7 +60,7 @@ observeEvent(input$upload_data, {
         },
         content = function(file) {
             ggsave(file, plots_data$drug_class_plot,
-            width = 11.69, height = 8.27, units = "in", dpi = "retina")
+            width = 13.69, height = 8.27, units = "in", dpi = "retina")
         }
     )
 
@@ -70,7 +70,7 @@ observeEvent(input$upload_data, {
         },
         content = function(file) {
             ggsave(file, plots_data$resistance_plot,
-            width = 6.07, height = 3.96, units = "in", dpi = "retina")
+            width = 21, height = 7, units = "in", dpi = "retina")
         }
     )
 })
