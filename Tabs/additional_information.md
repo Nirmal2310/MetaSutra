@@ -48,7 +48,7 @@ You can use this app by
 - First column must be named as `Sample_Id`.
 - Second column must be named as `Group`.
 
-<img src="input_data.png" alt="Input Data" style="width: 25%"/>
+<img src="input_data.png" alt="Input Data" style="width: 50%; margin-left: auto; margin-right: auto; display: block;"/>
 
 <a name="outputdata"></a> 
 
@@ -76,11 +76,11 @@ Example file: <Sample_information.csv>
 
 Analysis: When the list is uploaded, the data is then analyzed by the app. The app first utilizes fastp and bbtools for data pre-processing. The preprocessed FASTQ reads are then assembled using SPADES. The de novo assembled metagenome is then binned in MAGs using metaWRAP. The binned MAGs are annotated using GTDBtk. Antimicrobial Resistance Genes (AMRs) are then identified using RGI with CARD database. The counts for each ARG are calculated using SAMtools and the table from the unix pipeline contains the ARO term, Counts, Bacterial Classification and other terms. The counts for each ARG terms are then normalized using GPCM method in R and then utilized for further analysis and visualization in R.
 
-<img src="gpcm_equation.png" alt="Output Data" style="width: 50%"/>
+<img src="gpcm_equation.png" alt="Output Data" style="width: 50%; margin-left: auto; margin-right: auto; display: block;"/>
 
 ### **Analyzed Data**
 
-<img src="output_data.png" alt="Output Data" style="width: 75%"/>
+<img src="output_data.png" alt="Output Data" style="width: 100%; height:500%;"/>
 
 Example file: <consolidated_data.csv>
 
@@ -132,7 +132,7 @@ The plot shows the alpha diversity for each ARG terms. Alpha diversity is a meas
 
 The plot shows the comparison between the abundance of each ARG term between the Control and Case. This plot is useful to identify the ARGs that are abundant in the Control but not in the Case. The *p-value* was calculated using Kruskal-Walis test.
 
-<img src="Abundance_Kruskal_Walis.png" alt="Abundance Diversity" style="width: 100%"/>
+<img src="Abundance_Kruskal_Walis.png" alt="Abundance Diversity" style="width: 75%; margin-left: auto; margin-right: auto; display: block;"/>
 
 <a name="betadiversity"></a>
 
