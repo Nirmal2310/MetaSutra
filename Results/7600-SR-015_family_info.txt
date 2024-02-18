@@ -1,6 +1,0 @@
-Classification	Family
-Enterococcus_faecalis	Enterococcaceae
-Veillonella_parvula	Veillonellaceae
-Pseudomonas_aeruginosa	Pseudomonadaceae
-Enterobacter_ludwigii	Enterobacteriaceae
-unclassified	unclassified

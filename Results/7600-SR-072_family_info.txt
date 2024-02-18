@@ -1,6 +1,0 @@
-Classification	Family
-Enterococcus_faecalis	Enterococcaceae
-Staphylococcus_epidermidis	Staphylococcaceae
-Pseudomonas_aeruginosa	Pseudomonadaceae
-Pantoea_septica	Enterobacteriaceae
-unclassified	unclassified
