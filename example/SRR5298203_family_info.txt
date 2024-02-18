@@ -1,0 +1,10 @@
+Classification	Family
+Streptococcus_sp000187445	Streptococcaceae
+Enterococcus_B_faecium	Enterococcaceae
+Ligilactobacillus_salivarius	Lactobacillaceae
+Lactobacillus_paragasseri	Lactobacillaceae
+Bifidobacterium_infantis	Bifidobacteriaceae
+Escherichia_flexneri	Enterobacteriaceae
+Klebsiella_pneumoniae	Enterobacteriaceae
+Rothia	Micrococcaceae
+unclassified	unclassified
