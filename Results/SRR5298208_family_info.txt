@@ -1,0 +1,10 @@
+Classification	Family
+Streptococcus_sp000187445	Streptococcaceae
+Ligilactobacillus_salivarius	Lactobacillaceae
+Lactobacillus_johnsonii	Lactobacillaceae
+Veillonella_parvula_A	Veillonellaceae
+Escherichia_flexneri	Enterobacteriaceae
+Klebsiella_pneumoniae	Enterobacteriaceae
+Streptococcus	Streptococcaceae
+Veillonella	Veillonellaceae
+unclassified	unclassified
