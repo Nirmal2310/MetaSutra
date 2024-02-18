@@ -23,15 +23,18 @@ beta_diversity_analysis <- reactive({
         
         sample_annotation <- data.frame(sample_metadata$Group)
         
-        colnames(sample_annotation) <- "Treatment"
+        colnames(sample_annotation) <- "Group"
         
-        col_list <- list(sample_annotation = setNames(RColorBrewer::brewer.pal(3,"Paired"),
-                             sample_annotation))
+        sample_annotation$Group <- factor(sample_annotation$Group, levels = c("Control", "Case"))
+        
+        col_list <- list(Group = 
+                           setNames(rep(c("#746AB0", "#ffbf00"),
+                                        c(length(sample_annotation$Group[sample_annotation$Group=="Case"]),
+                                          length(sample_annotation$Group[sample_annotation$Group=="Control"]))),sample_annotation$Group))
         
         row_annotate <- rowAnnotation(
           df = sample_annotation,
-          col = col_list,
-          show_annotation_name = FALSE)
+          col = col_list, show_annotation_name = FALSE)
         
         row_dend <-  hclust(dist(t(data_4)), method = "complete")
         
@@ -66,8 +69,10 @@ beta_diversity_analysis <- reactive({
         pca.var.per <- round(pca.var / sum(pca.var) * 100, 1)
         pca.data <- data.frame(Sample_Id = rownames(pca$x), X=pca$x[,1],Y=pca$x[,2])
         pca.data <- inner_join(pca.data, sample_metadata, by = "Sample_Id")
+        pca.data$Group <- factor(pca.data$Group, levels = c("Control", "Case"))
         pca_plot <- ggplot(data = pca.data, aes(x = X, y = Y, color = Group)) +
           geom_point() +
+          scale_color_manual(values = c( "#ffbf00", "#746AB0")) +
           geom_mark_ellipse(aes(color = Group), expand = unit(0.5, "mm"), 
                             linetype = 2) +
           xlab(paste0("PC1 (", pca.var.per[1], "%", ")")) +
@@ -90,10 +95,10 @@ observeEvent(input$upload_data, {
     beta_diversity_plots <- beta_diversity_analysis()
 
     output$plot_heatmap <- renderPlot({
-      beta_diversity_plots$heatmap_plot}, height = 700)
+      beta_diversity_plots$heatmap_plot}, height = 500)
 
     output$plot_pca <- renderPlot({
-      beta_diversity_plots$pca_plot}, height = 700)
+      beta_diversity_plots$pca_plot}, height = 500)
 
     output$download_heatmap <- downloadHandler(
         filename = function() {

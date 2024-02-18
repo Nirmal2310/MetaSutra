@@ -4,9 +4,9 @@ tabPanel(
               tabPanel(title = "Heat Map",
                        downloadButton(outputId = "download_heatmap",
                                       label = "Download Heat Map (PNG)"),
-                       plotOutput("plot_heatmap", height = "auto", width = "auto")),
+                       plotOutput("plot_heatmap")),
               tabPanel(title = "PCA Plot",
                        downloadButton(outputId = "download_pca",
                                       label = "Download PCA Plot (PNG)"),
-                       plotOutput("plot_pca", height = "auto", width = "auto")))
+                       plotOutput("plot_pca")))
 )

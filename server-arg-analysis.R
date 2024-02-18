@@ -47,11 +47,11 @@ observeEvent(input$upload_data, {
     plots_data <- arg_analysis_plots()
 
     output$plot_drug_class_barplot <- renderPlot({
-        plots_data$drug_class_plot}, height = 700
+        plots_data$drug_class_plot}, height = 500
         )
 
     output$plot_resistance_plot <- renderPlot({
-        plots_data$resistance_plot}, height = 700
+        plots_data$resistance_plot}, height = 500
         )
 
     output$download_drug_class_barplot <- downloadHandler(
