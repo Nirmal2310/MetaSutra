@@ -1,6 +1,0 @@
-Classification	Family
-Enterococcus_faecalis	Enterococcaceae
-Staphylococcus_aureus	Staphylococcaceae
-Clostridium_P_perfringens	Clostridiaceae
-Escherichia_coli	Enterobacteriaceae
-unclassified	unclassified

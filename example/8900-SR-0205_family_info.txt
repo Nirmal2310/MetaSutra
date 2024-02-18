@@ -1,7 +1,0 @@
-Classification	Family
-Flavonifractor_plautii	Oscillospiraceae
-Clostridioides_difficile	Peptostreptococcaceae
-Veillonella_parvula_A	Veillonellaceae
-Escherichia_coli_D	Enterobacteriaceae
-Serratia_ureilytica	Enterobacteriaceae
-unclassified	unclassified

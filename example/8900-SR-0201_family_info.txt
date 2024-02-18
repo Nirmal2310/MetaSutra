@@ -1,9 +1,0 @@
-Classification	Family
-Enterococcus_A_devriesei	Enterococcaceae
-Enterococcus_faecalis	Enterococcaceae
-Staphylococcus_epidermidis	Staphylococcaceae
-Pseudomonas_E_sp002966775	Pseudomonadaceae
-Acinetobacter_ursingii	Moraxellaceae
-Enterobacter_cloacae_M	Enterobacteriaceae
-Enterobacter_himalayensis	Enterobacteriaceae
-unclassified	unclassified

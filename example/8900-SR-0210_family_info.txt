@@ -1,8 +1,0 @@
-Classification	Family
-Enterococcus_A_avium	Enterococcaceae
-Enterococcus_faecalis	Enterococcaceae
-Veillonella_dispar_A	Veillonellaceae
-Bifidobacterium_longum	Bifidobacteriaceae
-Escherichia_coli	Enterobacteriaceae
-Klebsiella_pneumoniae	Enterobacteriaceae
-unclassified	unclassified

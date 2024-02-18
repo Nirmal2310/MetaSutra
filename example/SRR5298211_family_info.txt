@@ -1,4 +1,0 @@
-Classification	Family
-Streptococcus_sp000187445	Streptococcaceae
-Enterobacter_cloacae	Enterobacteriaceae
-unclassified	unclassified

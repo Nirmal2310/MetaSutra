@@ -1,3 +1,0 @@
-Classification	Family
-Escherichia_flexneri	Enterobacteriaceae
-unclassified	unclassified
