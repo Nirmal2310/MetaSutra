@@ -201,7 +201,7 @@ if { conda env list | grep "seqtk";} > /dev/null 2>&1; then
 
 else
         
-        conda env create -n seqtk -y && conda activate seqtk && conda install -c  bioconda::seqkit -y
+        conda env create -n seqtk -y && conda activate seqtk && conda install -c bioconda bioconda::seqkit -y
 
         conda activate base
         
