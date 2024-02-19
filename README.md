@@ -16,7 +16,7 @@ You may now run the shiny app with just one command in R:
 shiny::runGitHub("MetaShiny", "Nirmal2310")
 ```
 
-Nirmal Singh Mahar<sup>1</sup>*, Anshul Budhraja<sup>2</sup>*, Suman Pakala<sup>3</sup>*, Ishaan Gupta<sup>1</sup>*, Seesandra V. Rajagopala<sup>3</sup>*.
+Nirmal Singh Mahar<sup>1</sup>, Anshul Budhraja<sup>2</sup>, Suman Pakala<sup>3</sup>, Ishaan Gupta<sup>1</sup>*, Seesandra V. Rajagopala<sup>3</sup>*.
 
 <sup>1</sup>Department of Biochemical Engineering and Biotechnology, Indian Institute of Technology, New Delhi, India-110016
 
