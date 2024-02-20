@@ -187,7 +187,7 @@ Example Output File: [Cohort Consolidated Data](consolidated_data.csv)
 This plot represents the resistance genes for antimicrobial drugs classified by the CARD database. The Y-axis represents the Drug class and X-axis represents the sum of all the ARG abundance belonging to the drug class.
 <br>
 <br>
-<img src="Drug_class.png" alt="Drug Class vs. ARG Abundance" style="width: 100%"/>
+<img src="Drug_Class.png" alt="Drug Class vs. ARG Abundance" style="width: 100%"/>
  
 ### **Resistance Mechanism**
 This plot displays the mechanism of resistance of each ARG, depicted as a proportion of all ARGs detected in the given cohort.
