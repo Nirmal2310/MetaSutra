@@ -137,6 +137,10 @@ awk '{if(NR>1) print $1}' ${sample}_out/${sample}_gtdbtk_classified/classify/${s
 
 awk '{size = split($2,array,";")} {sub(/s__/, "", array[size]); if(NR>1) {if($3~"N/A"){sub(/g__/,"",array[size-1]); print array[size-1]} else {print array[size]"_"$3}}}' ${sample}_out/${sample}_gtdbtk_classified/classify/${sample}.bac120.summary.tsv > ${sample}_out/${sample}_metawrap_bin_reassemble/reassembled_bins/tmp2
 
+awk '{a[$0]++} END{for (i in a) {if(a[i]==1) {print i} else {for(j=1; j<=a[i]; j++) {print i (j==1 ? "" : ("_"j))}}}}' ${sample}_out/${sample}_metawrap_bin_reassemble/reassembled_bins/tmp2 > ${sample}_out/${sample}_metawrap_bin_reassemble/reassembled_bins/tmp3
+
+mv ${sample}_out/${sample}_metawrap_bin_reassemble/reassembled_bins/tmp3 ${sample}_out/${sample}_metawrap_bin_reassemble/reassembled_bins/tmp2
+
 paste -d " " ${sample}_out/${sample}_metawrap_bin_reassemble/reassembled_bins/tmp ${sample}_out/${sample}_metawrap_bin_reassemble/reassembled_bins/tmp2 > ${sample}_out/${sample}_metawrap_bin_reassemble/reassembled_bins/list
 
 awk '{size = split($2,array,";");sub("f__","",array[5]);if(NR>1)print array[5]}' ${sample}_out/${sample}_gtdbtk_classified/classify/${sample}.bac120.summary.tsv > ${sample}_out/${sample}_metawrap_bin_reassemble/reassembled_bins/tmp3
@@ -180,7 +184,9 @@ fi
 while read p
 do 
 
-    rgi main -n $threads --input_sequence ${sample}_out/${sample}_${p}_bin/$p.fasta --output ${sample}_out/${sample}_${p}_bin/${p}_rgi --input_type contig --clean --local 
+    rgi main -n $threads --input_sequence ${sample}_out/${sample}_${p}_bin/$p.fasta --output ${sample}_out/${sample}_${p}_bin/${p}_rgi --input_type contig --clean --local
+
+    awk -F "\t" '{if(NR>1 && $10 >= 85 && $10 <= 100 && $21 >= 85 && $21 <= 100) print $0}' ${sample}_out/${sample}_${p}_bin/${p}_rgi.txt > ${sample}_out/${sample}_${p}_bin/temp && mv ${sample}_out/${sample}_${p}_bin/temp ${sample}_out/${sample}_${p}_bin/${p}_rgi.txt
 
 done < "${sample}_out/list"
 
@@ -191,17 +197,21 @@ do
     
     lines=$(wc -l < ${sample}_out/${sample}_${p}_bin/${p}_rgi.txt)
 
-    if [ "$lines" -le 1 ]; then
-        echo "NO ARGs FOUND FOR ${p}. CHECKING FOR NEXT BIN."
+    if [ "$lines" -le 0 ]; then
+        
+	echo "NO ARGs FOUND FOR ${p}. CHECKING FOR NEXT BIN."
+    
     else
 
-        awk 'BEGIN{FS=" "; OFS=""}{if(NR>1) print $1}' ${sample}_out/${sample}_${p}_bin/${p}_rgi.txt | awk 'BEGIN{FS="_";OFS="_"}NF{NF-=1};1' | sed 's/$//g' > ${sample}_out/${sample}_${p}_bin/tmp
+        awk -F "\t" '{print $2}' ${sample}_out/${sample}_${p}_bin/${p}_rgi.txt | sed 's/\(cov_[^_]*\)_.*$/\1/' > ${sample}_out/${sample}_${p}_bin/tmp
     
-        awk 'BEGIN{FS=" "; OFS=""}{if(NR>1) print ":"$3,"-",$5," ",$13}' ${sample}_out/${sample}_${p}_bin/${p}_rgi.txt > ${sample}_out/${sample}_${p}_bin/tmp2
+        awk -F "\t" '{print ":"$3"-"$4,$5}' ${sample}_out/${sample}_${p}_bin/${p}_rgi.txt > ${sample}_out/${sample}_${p}_bin/tmp2
     
-        paste -d "" ${sample}_out/${sample}_${p}_bin/tmp ${sample}_out/${sample}_${p}_bin/tmp2 > ${sample}_out/${sample}_${p}_bin/tmp3 
+        paste -d "" ${sample}_out/${sample}_${p}_bin/tmp ${sample}_out/${sample}_${p}_bin/tmp2 > ${sample}_out/${sample}_${p}_bin/tmp3
     
-        awk 'BEGIN {FS="\t"}{if(NR>1) print $9}' ${sample}_out/${sample}_${p}_bin/${p}_rgi.txt | awk '{gsub(/[[:punct:]]/, ""); gsub(/ /, "_"); print $0}' > ${sample}_out/${sample}_${p}_bin/tmp4
+        awk 'BEGIN {FS="\t"}{print $9}' ${sample}_out/${sample}_${p}_bin/${p}_rgi.txt | awk '{gsub(/[[:punct:]]/, ""); gsub(/ /, "_"); print $0}' > ${sample}_out/${sample}_${p}_bin/tmp4
+
+        awk -F "\t" '{print $2}' ${sample}_out/${sample}_${p}_bin/${p}_rgi.txt > ${sample}_out/${sample}_${p}_bin/tmp5
     
         while read -r line 
         do 
@@ -210,7 +220,7 @@ do
     
         done < "${sample}_out/${sample}_${p}_bin/tmp"
 
-        paste -d " " ${sample}_out/${sample}_${p}_bin/tmp3 ${sample}_out/${sample}_${p}_bin/tmp4 ${sample}_out/${sample}_${p}_bin/tmp ${sample}_out/${sample}_${p}_bin/tmp6  >> ${sample}_out/${sample}_${p}_bin/arg_coordinates
+        paste -d " " ${sample}_out/${sample}_${p}_bin/tmp3 ${sample}_out/${sample}_${p}_bin/tmp4 ${sample}_out/${sample}_${p}_bin/tmp5 ${sample}_out/${sample}_${p}_bin/tmp6  > ${sample}_out/${sample}_${p}_bin/arg_coordinates
 
         rm -r ${sample}_out/${sample}_${p}_bin/tmp*
 
@@ -255,7 +265,7 @@ samtools faidx ${sample}_out/${sample}_spades_contigs.fasta
 
 source $path/activate seqkit
 
-seqkit grep -j 16 -f ${sample}_out/${sample}_failed_headers ${sample}_out/${sample}_spades_contigs.fasta > ${sample}_out/${sample}_unclassified_contigs.fasta
+seqkit grep -j $threads -f ${sample}_out/${sample}_failed_headers ${sample}_out/${sample}_spades_contigs.fasta > ${sample}_out/${sample}_unclassified_contigs.fasta
 
 mkdir ${sample}_out/${sample}_unclassified_bin
 
@@ -265,44 +275,48 @@ source $path/activate rgi
 
 rgi main -n $threads --input_sequence ${sample}_out/${sample}_unclassified_contigs.fasta --output ${sample}_out/${sample}_unclassified_bin/${sample}_unclassified_rgi --input_type contig --clean --local
 
+awk -F "\t" '{if(NR>1 && $10 >= 85 && $10 <= 100 && $21 >= 85 && $21 <= 100) print $0}' ${sample}_out/${sample}_unclassified_bin/unclassified_rgi.txt > ${sample}_out/${sample}_unclassified_bin/temp  && mv ${sample}_out/${sample}_unclassified_bin/temp ${sample}_out/${sample}_unclassified_bin/unclassified_rgi.txt
+
 # Getting the Genomic Locations of Respective ARGs from the RGI Output
 
 lines=$(wc -l < ${sample}_out/${sample}_unclassified_bin/unclassified_rgi.txt)
 
-if ["$lines" -le 1 ]; then
+if ["$lines" -le 0 ]; then
 
     echo "No ARGs Found For UNCLASSIFIED BIN."
 else
 
-    awk 'BEGIN{FS=" "; OFS=""}{if(NR>1) print $1}' ${sample}_out/${sample}_unclassified_bin/${sample}_unclassified_rgi.txt | awk 'BEGIN{FS="_";OFS="_"}NF{NF-=1};1' | sed 's/$/:/g' > ${sample}_out/${sample}_unclassified_bin/tmp
+    awk 'BEGIN{FS=" "; OFS=""}{if(NR>1) print $1}' ${sample}_out/${sample}_unclassified_bin/unclassified_rgi.txt | sed 's/\(cov_[^_]*\)_.*$/\1/' > ${sample}_out/${sample}_unclassified_bin/tmp
 
-    awk 'BEGIN{FS=" "; OFS=""}{if(NR>1) print $3,"-",$5," ",$13}' ${sample}_out/${sample}_unclassified_bin/${sample}_unclassified_rgi.txt > ${sample}_out/${sample}_unclassified_bin/tmp2
+    awk -F "\t" '{ print ":"$3"-"$4,$5}' ${sample}_out/${sample}_unclassified_bin/unclassified_rgi.txt > ${sample}_out/${sample}_unclassified_bin/tmp2
 
     paste -d "" ${sample}_out/${sample}_unclassified_bin/tmp ${sample}_out/${sample}_unclassified_bin/tmp2 > ${sample}_out/${sample}_unclassified_bin/tmp3
 
-    awk 'BEGIN {FS="\t"}{if(NR>1) print $9}' ${sample}_out/${sample}_unclassified_bin/${sample}_unclassified_rgi.txt | awk '{gsub(/[[:punct:]]/, ""); gsub(/ /, "_"); print $0}' > ${sample}_out/${sample}_unclassified_bin/tmp4
+    awk 'BEGIN {FS="\t"}{ print $9}' ${sample}_out/${sample}_unclassified_bin/unclassified_rgi.txt | awk '{gsub(/[[:punct:]]/, ""); gsub(/ /, "_"); print $0}' > ${sample}_out/${sample}_unclassified_bin/tmp4
 
-    awk -F " " '{if(NR>1) print $1}' ${sample}_out/${sample}_unclassified_bin/${sample}_unclassified_rgi.txt | sed 's/_cov.*_/_/' > ${sample}_out/${sample}_unclassified_bin/tmp5
+    awk -F "\t" '{print $2}' ${sample}_out/${sample}_unclassified_bin/unclassified_rgi.txt > ${sample}_out/${sample}_unclassified_bin/tmp5
 
-    paste -d " " ${sample}_out/${sample}_unclassified_bin/tmp3 ${sample}_out/${sample}_unclassified_bin/tmp4 ${sample}_out/${sample}_unclassified_bin/tmp5 >> ${sample}_out/${sample}_unclassified_bin/arg_coordinates
+    paste -d " " ${sample}_out/${sample}_unclassified_bin/tmp3 ${sample}_out/${sample}_unclassified_bin/tmp4 ${sample}_out/${sample}_unclassified_bin/tmp5 > ${sample}_out/${sample}_unclassified_bin/arg_coordinates
 
     rm -r ${sample}_out/${sample}_unclassified_bin/tmp*
+
+    source $path/activate bwa
+
+    samtools faidx ${sample}_out/${sample}_unclassified_contigs.fasta
+
+    while read p q r s
+    do
+
+        samtools faidx ${sample}_out/${sample}_unclassified_contigs.fasta $p | sed "s/>.*$/>${s}_${r}/g" >> ${sample}_out/${sample}_unclassified_bin/${sample}_unclassified_amr.fasta
+
+    done < "${sample}_out/${sample}_unclassified_bin/arg_coordinates"
 fi
 
-# Indexing the Individual Fasta files for Getting the Counts
-
-source $path/activate bwa
-
-samtools faidx ${sample}_out/${sample}_unclassified_contigs.fasta
-
-while read p q r s
-do
-
-    samtools faidx ${sample}_out/${sample}_unclassified_contigs.fasta $p | sed "s/>.*$/>${s}_${r}/g" >> ${sample}_out/${sample}_unclassified_bin/${sample}_unclassified_amr.fasta
-
-done < "${sample}_out/${sample}_unclassified_bin/arg_coordinates"
+# Concatenating the AMR Fasta files to get the Counts
 
 cat ${sample}_out/${sample}_*_bin/*_amr.fasta > ${sample}_out/${sample}_amr_genes.fasta
+
+source $path/activate bwa
 
 samtools faidx ${sample}_out/${sample}_amr_genes.fasta
 
@@ -318,10 +332,12 @@ sed -i "$ d" ${sample}_out/temp
 
 ls -d ${sample}_out/${sample}*_bin/ | sed "s/${sample}_out\/${sample}_//g;s/_bin//g;s/\///g" > ${sample}_out/bin_list
 
-while read p; do tail -n +2 ${sample}_out/${sample}_${p}_bin/${p}_rgi.txt | while read line; do echo $p; done; done < "${sample}_out/bin_list" | sed 's/_/ /g' > ${sample}_out/temp2
+while read p; do cat ${sample}_out/${sample}_${p}_bin/${p}_rgi.txt | while read line; do echo $p; done; done < "${sample}_out/bin_list" | sed 's/_/ /g' > ${sample}_out/temp2
 
-awk 'BEGIN{FS="\t";OFS="\t"}{if(NR>1) print $9,$10,$15,$16,$17,$21}' ${sample}_out/${sample}_*_bin/*_rgi.txt | sed '/Best_Hit_ARO/d' | paste -d "\t" ${sample}_out/temp - ${sample}_out/temp2 > ${sample}_out/temp3
+awk 'BEGIN{FS="\t";OFS="\t"}{if(NR>1) print $9,$10,$15,$16,$17,$21}' ${sample}_out/${sample}_*_bin/*_rgi.txt | paste -d "\t" ${sample}_out/temp - ${sample}_out/temp2 > ${sample}_out/temp3
 
 echo -e "ARG\tORF_length\tCounts\tARO_term\tPercentage_Identity\tDrug_Class\tResistance_Mechanism\tAMR_Gene_Family\tPercentage_Coverage\tClassification" | cat - ${sample}_out/temp3 > ${sample}_out/${sample}_consolidated_final_arg_counts.txt
+
+rm -r ${sample}_out/temp*
 
 source $path/activate base
