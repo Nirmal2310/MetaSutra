@@ -44,7 +44,7 @@ information.
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
+    the Free Software Foundation, either version 3 of the License or
     (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -53,11 +53,11 @@ information.
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    and this program.  If not, see <http://www.gnu.org/licenses/>.
 
     You may contact the author of this code, Nirmal Singh Mahar, at <bez207518@iitd.ac.in>
     
-# Softwares adapted for use in the pipeline:
+# Software adapted for use in the pipeline:
 
 - Fastp <https://academic.oup.com/bioinformatics/article/34/17/i884/5093234>
 - BBSuite <https://jgi.doe.gov/data-and-tools/software-tools/bbtools/>
@@ -65,7 +65,6 @@ information.
 - metaWRAP <https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-018-0541-1>
 - GTDB-tk v2 <https://academic.oup.com/bioinformatics/article/38/23/5315/6758240>
 - RGI <https://academic.oup.com/nar/article/48/D1/D517/5608993>
-- Salmon <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5600148/>
 - SAMtools <https://academic.oup.com/bioinformatics/article/25/16/2078/204688>
 
 # DOI
