@@ -204,7 +204,7 @@ This plot displays the mechanism of resistance of each ARG, depicted as a propor
 The circular plot shows the ARG richness (number of unique ARGs) for each bacterial species. The bars are grouped by the bacterial species family information. This plot shows the diversity of ARGs per bacterial species across the cohort.
 <br>
 <br>
-<img src="ARG_cohort_richness.png" alt="Cohort ARG Richness" style="width: 100%"/>
+<img src="ARG_Cohort_Richness.png" alt="Cohort ARG Richness" style="width: 100%"/>
 
 ### **ARG Abundance Per Bacterial Species**
 
