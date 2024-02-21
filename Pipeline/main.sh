@@ -131,7 +131,7 @@ source $path/activate gtdbtk
 
 gtdbtk classify_wf --genome_dir ${sample}_out/${sample}_metawrap_bin_reassemble/reassembled_bins/ --out_dir ${sample}_out/${sample}_gtdbtk_classified --cpus $threads -x fa --prefix ${sample} --pplacer_cpus $threads
 
-# Manipulating the GTDBTK output to get the least taxonomic level information
+# Manipulating the GTDBTK output to get the lowest taxonomic-level information
 
 awk '{if(NR>1) print $1}' ${sample}_out/${sample}_gtdbtk_classified/classify/${sample}.bac120.summary.tsv | sed 's/^$//g; s/$/.fa/g' > ${sample}_out/${sample}_metawrap_bin_reassemble/reassembled_bins/tmp 
 
@@ -229,7 +229,7 @@ do
 
 done < "${sample}_out/list"
 
-# Indexing the Individual Fasta files for Getting the Counts
+# Indexing the Individual Assembly Fasta files to get the AMR genes
 
 source $path/activate bwa
 
@@ -239,8 +239,6 @@ do
     samtools faidx ${sample}_out/${sample}_${p}_bin/$p.fasta 
 
 done < "${sample}_out/list"
-
-# Getting Counts for Each ARG
 
 while read i
 do
