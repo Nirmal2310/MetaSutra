@@ -27,7 +27,7 @@ Nirmal Singh Mahar<sup>1</sup>, Anshul Budhraja<sup>2</sup>, Suman Pakala<sup>3<
 *Corresponding Author
 
 We would appreciate reports of any issues with the app via the issues option of 
-[Github](https://github.com/Nirmal2310/MetaShiny) or by emailing metashiny.help@gmail.com.
+[GitHub](https://github.com/Nirmal2310/MetaShiny) or by emailing metashiny.help@gmail.com.
 
 # Instructions
 
