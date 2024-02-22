@@ -98,6 +98,7 @@ alpha_diversity_analysis <- reactive({
           geom_boxplot() +
           stat_pvalue_manual(abundance_p_value, y.position = max(log2(abundance_data$Counts)) + 0.5,
                              label = "p.signif") +
+          geom_jitter(shape = 16, position = position_jitter(0.2), alpha = 0.5) +
           scale_color_manual(values = c("#ffbf00", "#746AB0")) +
           theme_light() +
           xlab("Group") +
