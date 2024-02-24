@@ -1,0 +1,10 @@
+Classification	Family
+Prevotella_sp900290275	Streptococcaceae
+Prevotella_sp000434515	Megasphaeraceae
+Bifidobacterium_longum	Bifidobacteriaceae
+Streptococcus_sp000187445	Enterobacteriaceae
+Megasphaera_sp900540735	Bacteroidaceae
+Escherichia_flexneri	Bacteroidaceae
+Veillonella	Veillonellaceae
+Veillonella_2	Veillonellaceae
+unclassified	unclassified
