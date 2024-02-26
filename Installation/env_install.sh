@@ -93,7 +93,7 @@ if { which spades.py; } >/dev/null 2>&1; then
         source ~/.bashrc
 
 else
-        wget -c http://cab.spbu.ru/files/release3.15.5/SPAdes-3.15.5-Linux.tar.gz
+        wget -c https://github.com/ablab/spades/releases/download/v3.15.5/SPAdes-3.15.5.tar.gz
 
         tar -xvf SPAdes-3.15.5-Linux.tar.gz && rm -r SPAdes-3.15.5-Linux.tar.gz
 
