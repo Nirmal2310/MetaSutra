@@ -38,9 +38,9 @@ Instructions can be found here: <https://github.com/Nirmal2310/MetaShiny/blob/ma
 This shiny code is licensed under the GPLv3. Please see the file LICENSE.txt for
 information.
 
-    START (Shiny Transcriptome Analysis Resource Tool) App
-    Shiny App for analysis and visualization of transcriptome data.
-    Copyright (C) 2016  Jessica Minnier
+    MetaShiny App
+    Shiny App for analysis and visualization of Metagenomics Data.
+    Copyright (C) 2024 Nirmal Singh Mahar
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
