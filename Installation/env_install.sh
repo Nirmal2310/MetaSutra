@@ -145,7 +145,7 @@ else
         
         source $path/activate metawrap
         
-        checkm data setRoot $PWD
+        echo -e "cat << EOF\n$PWD\nEOF\n" | checkm data setRoot
         
         source $path/activate base
         
