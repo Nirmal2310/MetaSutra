@@ -2,7 +2,7 @@
 
 helpFunction()
 {
-   echo "Usage: main.sh [-s SRR123456] [-r /path/to/reference.fasta] [-t 16]"
+   echo "Usage: rgi_main.sh [-s SRR123456] [-r /path/to/reference.fasta] [-t 16]"
    echo -e "\t-s <filename> Name of the input paired-end Fastq file(There's no need to add the file extension)"
    echo -e "\t-r <filename> Name of the Reference Host Genome Fasta File(Include the Path if the fasta file in not in the same directory as the script)"
    echo -e "\t-t <int> Number of threads to be used for the analysis. [default: 16]"
@@ -271,7 +271,7 @@ mkdir ${sample}_out/${sample}_unclassified_bin
 
 source $path/activate rgi
 
-rgi main -n $threads --input_sequence ${sample}_out/${sample}_unclassified_contigs.fasta --output ${sample}_out/${sample}_unclassified_bin/${sample}_unclassified_rgi --input_type contig --clean --local
+rgi main -n $threads --input_sequence ${sample}_out/${sample}_unclassified_contigs.fasta --output ${sample}_out/${sample}_unclassified_bin/unclassified_rgi --input_type contig --clean --local
 
 awk -F "\t" '{if(NR>1 && $10 >= 85 && $10 <= 100 && $21 >= 85 && $21 <= 100) print $0}' ${sample}_out/${sample}_unclassified_bin/unclassified_rgi.txt > ${sample}_out/${sample}_unclassified_bin/temp  && mv ${sample}_out/${sample}_unclassified_bin/temp ${sample}_out/${sample}_unclassified_bin/unclassified_rgi.txt
 
@@ -284,7 +284,7 @@ if ["$lines" -le 0 ]; then
     echo "No ARGs Found For UNCLASSIFIED BIN."
 else
 
-    awk 'BEGIN{FS=" "; OFS=""}{if(NR>1) print $1}' ${sample}_out/${sample}_unclassified_bin/unclassified_rgi.txt | sed 's/\(cov_[^_]*\)_.*$/\1/' > ${sample}_out/${sample}_unclassified_bin/tmp
+    awk -F "\t" '{ print $2}' ${sample}_out/${sample}_unclassified_bin/unclassified_rgi.txt | sed 's/\(cov_[^_]*\)_.*$/\1/' > ${sample}_out/${sample}_unclassified_bin/tmp
 
     awk -F "\t" '{ print ":"$3"-"$4,$5}' ${sample}_out/${sample}_unclassified_bin/unclassified_rgi.txt > ${sample}_out/${sample}_unclassified_bin/tmp2
 
@@ -332,7 +332,7 @@ ls -d ${sample}_out/${sample}*_bin/ | sed "s/${sample}_out\/${sample}_//g;s/_bin
 
 while read p; do cat ${sample}_out/${sample}_${p}_bin/${p}_rgi.txt | while read line; do echo $p; done; done < "${sample}_out/bin_list" | sed 's/_/ /g' > ${sample}_out/temp2
 
-awk 'BEGIN{FS="\t";OFS="\t"}{if(NR>1) print $9,$10,$15,$16,$17,$21}' ${sample}_out/${sample}_*_bin/*_rgi.txt | paste -d "\t" ${sample}_out/temp - ${sample}_out/temp2 > ${sample}_out/temp3
+awk 'BEGIN{FS="\t";OFS="\t"}{ print $9,$10,$15,$16,$17,$21}' ${sample}_out/${sample}_*_bin/*_rgi.txt | paste -d "\t" ${sample}_out/temp - ${sample}_out/temp2 > ${sample}_out/temp3
 
 echo -e "ARG\tORF_length\tCounts\tARO_term\tPercentage_Identity\tDrug_Class\tResistance_Mechanism\tAMR_Gene_Family\tPercentage_Coverage\tClassification" | cat - ${sample}_out/temp3 > ${sample}_out/${sample}_consolidated_final_arg_counts.txt
 
