@@ -20,7 +20,7 @@ WORKDIR /module
 
 RUN wget -c https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /module/miniconda.sh && chmod +x /module/miniconda.sh && bash /module/miniconda.sh -b -p /module/miniconda && rm -rf /module/miniconda.sh
 
-ENV PATH="/module/miniconda/bin:/opt/spades/:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH"
+ENV PATH="/module/miniconda/bin:/opt/spades/bin/:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH"
 
 RUN conda config --add channels defaults
 
@@ -62,7 +62,7 @@ RUN conda create --name fastp --file fastp.txt
 
 RUN git clone https://github.com/bxlab/metaWRAP.git
 
-ENV PATH="/module/miniconda/bin:/opt/spades/:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/module/metaWRAP/bin/:$PATH"
+ENV PATH="/module/miniconda/bin:/opt/spades/bin/:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/module/metaWRAP/bin/:$PATH"
 
 RUN conda create --name metawrap --file metawrap.txt
 
