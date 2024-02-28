@@ -271,7 +271,7 @@ mkdir ${sample}_out/${sample}_unclassified_bin
 
 source $path/activate rgi
 
-rgi main -n $threads --input_sequence ${sample}_out/${sample}_unclassified_contigs.fasta --output ${sample}_out/${sample}_unclassified_bin/${sample}_unclassified_rgi --input_type contig --clean --local
+rgi main -n $threads --input_sequence ${sample}_out/${sample}_unclassified_contigs.fasta --output ${sample}_out/${sample}_unclassified_bin/unclassified_rgi --input_type contig --clean --local
 
 awk -F "\t" '{if(NR>1 && $10 >= 85 && $10 <= 100 && $21 >= 85 && $21 <= 100) print $0}' ${sample}_out/${sample}_unclassified_bin/unclassified_rgi.txt > ${sample}_out/${sample}_unclassified_bin/temp  && mv ${sample}_out/${sample}_unclassified_bin/temp ${sample}_out/${sample}_unclassified_bin/unclassified_rgi.txt
 
