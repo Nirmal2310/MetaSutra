@@ -42,7 +42,7 @@ ADD metawrap.txt .
 
 ADD rgi.txt .
 
-ADD seqtk.txt .
+ADD seqkit.txt .
 
 ENV path="/module/miniconda/bin"
 
@@ -106,4 +106,4 @@ RUN echo "export GTDBTK_DATA_PATH=/module/DATA/release95/" > /module/miniconda/e
 
 WORKDIR /module
 
-RUN conda create --name seqtk --file seqtk.txt
+RUN conda create --name seqkit --file seqkit.txt
