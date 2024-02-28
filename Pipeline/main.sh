@@ -332,7 +332,7 @@ ls -d ${sample}_out/${sample}*_bin/ | sed "s/${sample}_out\/${sample}_//g;s/_bin
 
 while read p; do cat ${sample}_out/${sample}_${p}_bin/${p}_rgi.txt | while read line; do echo $p; done; done < "${sample}_out/bin_list" | sed 's/_/ /g' > ${sample}_out/temp2
 
-awk 'BEGIN{FS="\t";OFS="\t"}{if(NR>1) print $9,$10,$15,$16,$17,$21}' ${sample}_out/${sample}_*_bin/*_rgi.txt | paste -d "\t" ${sample}_out/temp - ${sample}_out/temp2 > ${sample}_out/temp3
+awk 'BEGIN{FS="\t";OFS="\t"}{ print $9,$10,$15,$16,$17,$21}' ${sample}_out/${sample}_*_bin/*_rgi.txt | paste -d "\t" ${sample}_out/temp - ${sample}_out/temp2 > ${sample}_out/temp3
 
 echo -e "ARG\tORF_length\tCounts\tARO_term\tPercentage_Identity\tDrug_Class\tResistance_Mechanism\tAMR_Gene_Family\tPercentage_Coverage\tClassification" | cat - ${sample}_out/temp3 > ${sample}_out/${sample}_consolidated_final_arg_counts.txt
 
