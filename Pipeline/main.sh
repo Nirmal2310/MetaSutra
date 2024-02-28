@@ -284,7 +284,7 @@ if ["$lines" -le 0 ]; then
     echo "No ARGs Found For UNCLASSIFIED BIN."
 else
 
-    awk 'BEGIN{FS=" "; OFS=""}{if(NR>1) print $1}' ${sample}_out/${sample}_unclassified_bin/unclassified_rgi.txt | sed 's/\(cov_[^_]*\)_.*$/\1/' > ${sample}_out/${sample}_unclassified_bin/tmp
+    awk -F "\t" '{ print $2}' ${sample}_out/${sample}_unclassified_bin/unclassified_rgi.txt | sed 's/\(cov_[^_]*\)_.*$/\1/' > ${sample}_out/${sample}_unclassified_bin/tmp
 
     awk -F "\t" '{ print ":"$3"-"$4,$5}' ${sample}_out/${sample}_unclassified_bin/unclassified_rgi.txt > ${sample}_out/${sample}_unclassified_bin/tmp2
 
