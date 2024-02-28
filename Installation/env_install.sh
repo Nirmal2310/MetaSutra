@@ -195,12 +195,12 @@ else
 
 fi
 
-if { conda env list | grep "seqtk";} > /dev/null 2>&1; then
+if { conda env list | grep "seqkit";} > /dev/null 2>&1; then
 
         echo "Environment Exist"
 
 else
         
-        conda create --name seqtk --file seqtk.txt
+        conda create --name seqkit --file seqkit.txt
         
 fi
