@@ -179,22 +179,6 @@ else
 
 fi
 
-if { conda env list | grep "plasmidverify"; } >/dev/null 2>&1; then
-        
-        echo "Environment Exist"
-
-else
-        
-        conda create --name plasmidverify --file plasmidverify.txt
-        
-        git clone https://github.com/ablab/plasmidVerify.git
-        
-        echo "export PATH=\"$PWD/plasmidVerify/:\$PATH\"" >> ~/.bashrc
-        
-        source ~/.bashrc
-
-fi
-
 if { conda env list | grep "seqkit";} > /dev/null 2>&1; then
 
         echo "Environment Exist"
