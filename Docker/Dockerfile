@@ -86,8 +86,6 @@ RUN source /module/miniconda/bin/activate base
 
 WORKDIR /module
 
-ADD main.sh .
-
 RUN conda create --name gtdbtk --file gtdbtk.txt
 
 RUN mkdir DATA
@@ -107,3 +105,5 @@ RUN echo "export GTDBTK_DATA_PATH=/module/DATA/release95/" > /module/miniconda/e
 WORKDIR /module
 
 RUN conda create --name seqkit --file seqkit.txt
+
+ADD main.sh .
