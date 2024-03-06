@@ -17,7 +17,7 @@ tabPanel(
           fileInput("inputfile", "Select the sample Information File", accept = ".csv", multiple = FALSE),
           textInput("fastafile", "Enter the Name of the Host Genome Fasta", value = ""),
           numericInput("threads", "Number of Threads", 16),
-          numericInput("memory", "Memory utilized (GB)", 100),
+          numericInput("memory", "Memory utilized (GB)", 200),
           numericInput("comp", "% Completeness (metaWRAP)", 55),
           numericInput("cont", "% Contamination (metaWRAP)", 10),
           checkboxInput("Setup", "Setup")
