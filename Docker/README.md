@@ -2,7 +2,7 @@
 
 #### Step 1: Installing the base container that MetaShiny Docker Container will use
 ```bash
-docker build -t base:latest base/.
+docker build -t base:latest base
 ```
 - Please Note that if you are working behind a proxy, edit lines 10,37 and 39 in the base Dockerfile specifying the proxy address. Also, if you are not working behind a proxy, comment on the same lines in the base Dockerfile.
 
