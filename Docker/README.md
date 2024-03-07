@@ -32,5 +32,12 @@ Here list contains the SRA IDs of all the samples present in the current working
 
 If you want to calculate run metrics like Run Time, CPU utilization and Peak Memory usage, you can use the **metashiny_run.sh script** given in this directory. Just copy this script to the directory containing the sequencing data. Now you can run the script using the following command:
 ```bash
-bash metashiny_run.sh 
+bash metashiny_run.sh -s SRR123456 -r Homo_sapiens_new_reference.fasta -t 16 -m 200
+```
+Again, you can loop over this command to run MetaShiny for multiple samples
+```bash
+while read sample
+do
+bash metashiny_run.sh -s $sample -r Homo_sapiens_new_reference.fasta -t 16 -m 200
+done < "list"
 ```
