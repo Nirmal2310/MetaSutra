@@ -6,7 +6,7 @@ helpFunction()
    echo -e "\t-s <filename> Name of the input paired-end Fastq file(There's no need to add the file extension)"
    echo -e "\t-r <filename> Name of the Reference Host Genome Fasta File(Include the Path if the fasta file in not in the same directory as the script)"
    echo -e "\t-t <int> Number of threads to be used for the analysis. [default: 16]"
-   echo -e "\t-m <int> Amount of memory (GB) to be used for the analysis. [default: 100]"
+   echo -e "\t-m <int> Amount of memory (GB) to be used for the analysis. [default: 200]"
    echo -e "\t-c <int> Assembly completeness threshold for the metaWRAP pipeline. [default: 55]"
    echo -e "\t-d <int> Contamination threshold for the metaWRAP pipeline. [default: 10]"
    exit 1 # Exit script after printing help
@@ -16,7 +16,7 @@ helpFunction()
 
 threads=16
 
-mem=100
+mem=200
 
 comp=55
 
