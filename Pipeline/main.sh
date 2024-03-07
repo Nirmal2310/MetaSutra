@@ -2,7 +2,7 @@
 
 helpFunction()
 {
-   echo "Usage: rgi_main.sh [-s SRR123456] [-r /path/to/reference.fasta] [-t 16]"
+   echo "Usage: main.sh [-s SRR123456] [-r /path/to/reference.fasta] [-t 16]"
    echo -e "\t-s <filename> Name of the input paired-end Fastq file(There's no need to add the file extension)"
    echo -e "\t-r <filename> Name of the Reference Host Genome Fasta File(Include the Path if the fasta file in not in the same directory as the script)"
    echo -e "\t-t <int> Number of threads to be used for the analysis. [default: 16]"
