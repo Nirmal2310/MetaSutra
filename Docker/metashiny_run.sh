@@ -47,6 +47,12 @@ do
     esac
 done
 
+if [ -z "$sample" ] || [ -z "$ref" ]
+    then
+    echo "Please provide atleast the sample name and the reference genome name";
+    helpFunction
+fi
+
 DOCKERCMD="time -o metashiny_${sample}_${threads}.txt docker run -v $PWD:$PWD --name metashiny_${threads} --cpus ${threads} --memory ${mem}g --workdir $PWD --rm metashiny:latest bash /module/main.sh -s ${sample} -r ${ref} -t ${threads} -m ${mem} -c ${comp} -d ${cont}"
 
 date +"[%Y-%m-%d %H:%M:%S] Starting Run using the contained : metashiny:latest"
