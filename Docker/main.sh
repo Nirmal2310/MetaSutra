@@ -137,7 +137,7 @@ awk '{if(NR>1) print $1}' ${sample}_out/${sample}_gtdbtk_classified/classify/${s
 
 awk '{size = split($2,array,";")} {sub(/s__/, "", array[size]); if(NR>1) {if($3~"N/A"){sub(/g__/,"",array[size-1]); print array[size-1]} else {print array[size]"_"$3}}}' ${sample}_out/${sample}_gtdbtk_classified/classify/${sample}.bac120.summary.tsv > ${sample}_out/${sample}_metawrap_bin_reassemble/reassembled_bins/tmp2
 
-awk '{a[$0]++} END{for (i in a) {if(a[i]==1) {print i} else {for(j=1; j<=a[i]; j++) {print i (j==1 ? "" : ("_"j))}}}}' ${sample}_out/${sample}_metawrap_bin_reassemble/reassembled_bins/tmp2 > ${sample}_out/${sample}_metawrap_bin_reassemble/reassembled_bins/tmp3
+awk '{ c[$0]++; printf "%s%s\n", $0, (c[$0] > 1 ? "_" c[$0] : "") }' ${sample}_out/${sample}_metawrap_bin_reassemble/reassembled_bins/tmp2 > ${sample}_out/${sample}_metawrap_bin_reassemble/reassembled_bins/tmp3
 
 mv ${sample}_out/${sample}_metawrap_bin_reassemble/reassembled_bins/tmp3 ${sample}_out/${sample}_metawrap_bin_reassemble/reassembled_bins/tmp2
 
