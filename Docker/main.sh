@@ -279,7 +279,7 @@ awk -F "\t" '{if(NR>1 && $10 >= 85 && $10 <= 100 && $21 >= 85 && $21 <= 100) pri
 
 lines=$(wc -l < ${sample}_out/${sample}_unclassified_bin/unclassified_rgi.txt)
 
-if ["$lines" -le 0 ]; then
+if [ "$lines" -le 0 ]; then
 
     echo "No ARGs Found For UNCLASSIFIED BIN."
 else
