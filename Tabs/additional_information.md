@@ -202,7 +202,7 @@ This plot displays the mechanism of resistance of each ARG, depicted as a propor
 
 ### **ARG Richness Per Bacterial Species**
 
-The circular plot shows the ARG richness (number of unique ARGs) for each bacterial species. The bars are grouped by the bacterial species family information. This plot shows the diversity of ARGs per bacterial species across the cohort.
+The circular plot shows each bacterial species's ARG burden (number of unique ARGs). The bacterial species family information groups the bars. This plot shows the diversity of ARGs per bacterial species across the case and control samples.
 <br>
 <br>
 <img src="ARG_Cohort_Richness.png" alt="Cohort ARG Richness" style="width: 100%"/>
@@ -214,7 +214,7 @@ The circular plot shows the AMR Gene Family abundance {(Normalized Counts/sum(No
 <br>
 <img src="ARG_Cohort_Abundance.png" alt="Cohort ARG Abundance" style="width: 100%"/>
 
-Both these plots can be utilized to target the most significant ARG gene causing bacterial species.
+Both these plots can be utilized to target the most significant ARG gene-causing bacterial species.
 
 <a name="alphadiversity"></a>
 
@@ -222,14 +222,14 @@ Both these plots can be utilized to target the most significant ARG gene causing
 
 ### **Alpha Diversity**
 
-The plot shows the alpha diversity for each ARG terms. Alpha diversity is a measure of the number of species that are present in a given community. This plot compares the ARG diversity between Control and Case.
+The plot shows the alpha diversity for each ARG term. Alpha diversity is a measure of the number of species that are present in a given community. This plot compares the ARG diversity between Control and Case.
 <br>
 <br>
 <img src="Alpha_diversity.png" alt="Alpha Diversity" style="width: 100%"/>
 
 ### **Abundance Diversity**
 
-The plot shows the comparison between the abundance of each ARG term between the Control and Case. This plot is useful to identify the ARGs that are abundant in the Control but not in the Case. The *p-value* was calculated using Kruskal-Walis test.
+The plot shows the comparison between the abundance of each ARG term between the Control and Case. This plot is useful for identifying the ARGs that are abundant in the Control but not in the Case. The *p-value* was calculated using the Kruskal-Walis test.
 <br>
 <br>
 <img src="Abundance_Kruskal_Walis.png" alt="Abundance Diversity" style="width: 100%; margin-left: auto; margin-right: auto; display: block;"/>
@@ -245,7 +245,7 @@ This plot uses Principal Component Analysis (PCA) to calculate the principal com
 
 ### **HeatMap** 
 
-This plot shows Heatmap with ARG abundance in terms of the log2(Normalized Counts) across the samples. Both samples and ARGs were clustered based on ARG abundance with Euclidean distance by complete linkage hierarchical clustering.
+This plot shows a Heatmap with ARG abundance regarding the log2(Normalized Counts) across the samples. Both samples and ARGs were clustered based on ARG abundance with Euclidean distance by complete linkage hierarchical clustering.
 <br>
 <br>
 <img src="HeatMap.png" alt="HeatMap" style="width: 100%"/>
