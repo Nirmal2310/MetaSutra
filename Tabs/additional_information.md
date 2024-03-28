@@ -99,13 +99,15 @@ Example Sample Information file: [Sample Information](Sample_information.csv)
 
 # **Analysis** 
 
-When the list is uploaded, the data is then analyzed by the app. The app first utilizes fastp and bbtools for data pre-processing (removing adapter sequences, low quality reads and host contamination). The preprocessed FASTQ reads are then assembled using SPADES in De Novo fashion. The assembled metagenome is then binned in MAGs (Metagenome Assembled Genomes) using metaWRAP. All the MAGs with % Completeness >= 55 and % Contamination <= 10 are retained for further analysis. Users can change the cutoff while starting the analysis in the Input Data tab. The binned MAGs are annotated using GTDBtk. Antimicrobial Resistance Genes (ARGs) from the binned MAGs are then identified using RGI with CARD database. The uniquely mapped read counts for each ARG are calculated using SAMtools. The final table from the unix pipeline contains the ARO term, Counts, Bacterial Classification and other information. The counts for each ARG terms are then normalized using GPCM method in R and then utilized for further analysis and visualization in R. To determine resistome Case-Control association, we calculated RPKM value (equation 2) of each ARG gene per sample. We then summarised the ARG RPKM abundance per sample and compared the abundance between the Case and Control Groups. To assess the statistical significance of this assosiation, we have used Wilcox rank-sum test. Graphical abstract of MetaSutra is shown below:
+When the list is uploaded, the data is then analyzed by the app. The app first utilizes fastp and bbtools for data pre-processing (removing adapter sequences, low quality reads and host contamination). The preprocessed FASTQ reads are then assembled using SPADES in De Novo fashion. The assembled metagenome is then binned in MAGs (Metagenome Assembled Genomes) using metaWRAP. All the MAGs with % Completeness >= 55 and % Contamination <= 10 are retained for further analysis. Users can change the cutoff while starting the analysis in the Input Data tab. The binned MAGs are annotated using GTDBtk. Antimicrobial Resistance Genes (ARGs) from the binned MAGs are then identified using RGI with CARD database. The uniquely mapped read counts for each ARG are calculated using SAMtools. The final table from the unix pipeline contains the ARO term, Counts, Bacterial Classification and other information. The counts for each ARG terms are then normalized using GPCM method in R and then utilized for further analysis and visualization in R. To determine resistome Case-Control association, we calculated RPKM value (equation 2) of each ARG gene per sample. We then summarised the ARG RPKM abundance per sample and compared the abundance between the Case and Control Groups. To assess the statistical significance of this assosiation, we have used Wilcox rank-sum test.
 <br>
 $$GCPM(i) = \frac{\{Counts(i)/Gene\ \\ Length(i)\}*10^6}{\sum (Counts/Gene\ \\ Length)};\ \\ GCPM(i) = GCPM\ \\ Value\ \\ of\ \\ Gene\ \\ i\ \\ (1)$$
 
 $$RPKM(i) = \frac{Counts(i)*10^6}{(\sum Counts) * Gene\ \\ Length\ \\ (Kb)};\ \\ RPKM(i) = RPKM\ \\  Value\ \\  of\ \\  Gene\ \\  i\ \\ (2)$$
 
-<br>
+<be>
+
+Graphical abstract of MetaSutra is shown below:
 
 <img src="MetaSutra.png" alt="MetaSutra" style="width: 100%"/>
 
