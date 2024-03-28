@@ -12,7 +12,7 @@ source("packages.R")
 ui <- navbarPage(
 
   theme = "bootstrap.min.css",
-  title = "MetaShiny",
+  title = "MetaSutra",
   source("ui-tab-intro.R", local = TRUE)$value,
   source("ui-tab-input.R", local = TRUE)$value,
   source("ui-tab-ARG-cohort.R", local = TRUE)$value,
