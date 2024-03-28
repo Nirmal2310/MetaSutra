@@ -1,8 +1,12 @@
-# MetaShiny
+# MetaSutra
 
 This is the code to run the app described in the manuscript: 
 
+*Not Available Yet*
+
 The app is hosted on Shinyapps.io here:
+
+*Not Available Yet*
 
 To run this app locally on your machine, download R or RStudio and run the following commands once to set up the environment:
 ```
@@ -13,7 +17,7 @@ runApp()
 You may now run the shiny app with just one command in R:
 
 ```
-shiny::runGitHub("MetaShiny", "Nirmal2310")
+shiny::runGitHub("MetaSutra", "Nirmal2310")
 ```
 
 Nirmal Singh Mahar<sup>1</sup>, Anshul Budhraja<sup>2</sup>, Suman Pakala<sup>3</sup>, Ishaan Gupta<sup>1</sup>*, Seesandra V. Rajagopala<sup>3</sup>\*.
@@ -27,18 +31,18 @@ Nirmal Singh Mahar<sup>1</sup>, Anshul Budhraja<sup>2</sup>, Suman Pakala<sup>3<
 *Corresponding Author
 
 We would appreciate reports of any issues with the app via the issues option of 
-[GitHub](https://github.com/Nirmal2310/MetaShiny) or by emailing metashiny.help@gmail.com.
+[GitHub](https://github.com/Nirmal2310/MetaSutra) or by emailing metasutra.help@gmail.com.
 
 # Instructions
 
-Instructions can be found here: <https://github.com/Nirmal2310/MetaShiny/blob/main/Tabs/additional_information.md> 
+Instructions can be found here: <https://github.com/Nirmal2310/MetaSutra/blob/main/Tabs/additional_information.md> 
 
 # Licensing
 
 This shiny code is licensed under the GPLv3. Please see the file LICENSE.txt for
 information.
 
-    MetaShiny App
+    MetaSutra App
     Shiny App for analysis and visualization of Metagenomics Data.
     Copyright (C) 2024 Nirmal Singh Mahar
 
