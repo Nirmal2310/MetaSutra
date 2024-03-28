@@ -107,7 +107,7 @@ $$RPKM(i) = \frac{Counts(i)*10^6}{(\sum Counts) * Gene\ \\ Length\ \\ (Kb)};\ \\
 
 <be>
 
-**Schematic Representation of MetaSutra:**
+### **Graphical Abstract of MetaSutra:**
 
 <img src="MetaSutra.png" alt="MetaSutra" style="width: 100%"/>
 
