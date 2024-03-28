@@ -105,7 +105,7 @@ $$GCPM(i) = \frac{\{Counts(i)/Gene\ \\ Length(i)\}*10^6}{\sum (Counts/Gene\ \\ L
 
 $$RPKM(i) = \frac{Counts(i)*10^6}{(\sum Counts) * Gene\ \\ Length\ \\ (Kb)};\ \\ RPKM(i) = RPKM\ \\  Value\ \\  of\ \\  Gene\ \\  i\ \\ (2)$$
 
-<be>
+<br>
 
 ### **Graphical Abstract of MetaSutra:**
 
