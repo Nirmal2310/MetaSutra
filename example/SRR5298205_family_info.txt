@@ -1,6 +1,0 @@
-Classification	Family
-Streptococcus_sp900543065	Streptococcaceae
-Streptococcus_sp000187445	Streptococcaceae
-Escherichia_flexneri	Enterobacteriaceae
-Klebsiella_pneumoniae	Enterobacteriaceae
-unclassified	unclassified
