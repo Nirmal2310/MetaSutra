@@ -101,9 +101,9 @@ Example Sample Information file: [Sample Information](Sample_information.csv)
 
 When the list is uploaded, the app analyzes the data. The app first utilizes Fastp and BBtools for data pre-processing (removing adapter sequences, low-quality reads and host contamination). The preprocessed FASTQ reads are then assembled using SPAdes in De Novo fashion. The assembled metagenome is then binned in MAGs (Metagenome Assembled Genomes) using metaWRAP. All the MAGs with % Completeness >= 55 and % Contamination <= 10 are retained for further analysis. Users can change the cutoff while starting the analysis in the Input Data tab. The binned MAGs are annotated using GTDBtk. Contigs not classified by metaWRAP were concatenated into a bin named **Unclassified**. Antimicrobial Resistance Genes (ARGs) from the binned MAGs and Unclassified contigs are then identified using RGI with CARD database. The uniquely mapped read counts for each ARG are calculated using SAMtools. The final table from the UNIX pipeline contains the ARO term, Counts, Bacterial Classification and other information. The counts for each ARG term are normalized using the GCPM method in R and then utilized for further analysis and visualization in R. To determine the resistome Case-Control association, we calculated each ARG gene's RPKM value (equation 2) per sample. We then summarised the ARG RPKM abundance per sample and compared the abundance between the Case and Control Groups. We have used the Wilcox rank-sum test to assess this association's statistical significance.
 <br>
-$$GCPM(i) = \frac{\{Counts(i)/Gene\ \\ Length(i)\}*10^6}{\sum (Counts/Gene\ \\ Length)};\ \\ GCPM(i) = GCPM\ \\ Value\ \\ of\ \\ Gene\ \\ i\ \\ (1)$$
+$$GCPM(i) = \frac{\{Counts(i)/Gene \hspace{0.1cm} Length(i)\}*10^6}{\sum (Counts/Gene \hspace{0.1cm} Length (i))}; \hspace{0.1cm} GCPM(i) = GCPM \hspace{0.1cm} Value \hspace{0.1cm} of \hspace{0.1cm} Gene \hspace{0.1cm} i \hspace{0.1cm} (1)$$
 
-$$RPKM(i) = \frac{Counts(i)*10^6}{(\sum Counts) * Gene\ \\ Length\ \\ (Kb)};\ \\ RPKM(i) = RPKM\ \\  Value\ \\  of\ \\  Gene\ \\  i\ \\ (2)$$
+$$RPKM(i) = \frac{Counts(i)*10^6}{(\sum Counts) * Gene(i) \hspace{0.1cm} Length \hspace{0.1cm} in \hspace{0.1cm} Kb}; \hspace{0.1cm} RPKM(i) = RPKM \hspace{0.1cm} Value \hspace{0.1cm} of \hspace{0.1cm} Gene \hspace{0.1cm} i  \hspace{0.1cm} (2)$$
 
 <br>
 
