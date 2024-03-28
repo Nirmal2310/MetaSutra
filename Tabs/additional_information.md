@@ -2,7 +2,7 @@
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-### **MetaSutra app allows users to analyze and visualize metagenomic short-read sequencing data.**
+### **The MetaSutra app allows users to analyze and visualize metagenomic short-read sequencing data.**
 
 - It takes a list containing the sample names and their respective groups (Control or Case). 
 
