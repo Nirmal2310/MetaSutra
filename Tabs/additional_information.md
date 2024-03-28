@@ -6,15 +6,15 @@
 
 - It takes a list containing the sample names and their respective groups (Control or Case). 
 
-- The Fastq file must have a the same name as the sample name in the list.
+- The Fastq file must have the same name as the sample name in the list.
 
-- The app will perform end to end analysis using the sequencing data with appropriate tools.
+- The app will perform end-to-end analysis using the sequencing data and appropriate tools.
 
 # **Instructions**
 
-Code can be found on [github](https://github.com/Nirmal2310/MetaSutra)
+Code can be found on [GitHub](https://github.com/Nirmal2310/MetaSutra)
 
-Please post [issues](https://github.com/Nirmal2310/MetaSutra) on github, and feel free to contribute by forking and submitting development branches.
+Please post [issues](https://github.com/Nirmal2310/MetaSutra) on GitHub, and feel free to contribute by forking and submitting development branches.
 
 To run this app locally on your machine, download R or RStudio in the local system.
 
@@ -24,14 +24,14 @@ You may now run the shiny app with just one command in R:
 shiny::runGitHub("MetaSutra", "Nirmal2310")
 ```
 
-If you are running the App for the first time please tick the checkbox "setup" in the Input Data tab to install the required tools, R packages and databases.
+If you are running the App for the first time, please tick the checkbox "setup" in the Input Data tab to install the required tools, R packages and databases.
 
 # **Input Data**
 
 You can use this app by
 
 1. Exploring the pre-loaded example data set. This is a pre-loaded metagenome DNA sequencing of ten samples example for exploring the app's features.
-2. Upload your own data
+2. Upload your data
 
 <a name="dataformat"></a> 
 
@@ -39,8 +39,8 @@ You can use this app by
 
 - Must be a .CSV *comma-separated-value* file.
 - File must have a header row.
-- First column must be named as `Sample_Id`.
-- Second column must be named as `Group`.
+- The first column must be named `Sample_Id`.
+- The second column must be named as `Group`.
 
 <style>
   .sample_info {
@@ -228,7 +228,7 @@ The plot shows the alpha diversity for each ARG term. Alpha diversity is a measu
 
 ### **Abundance Diversity**
 
-The plot shows the comparison between the abundance of each ARG term between the Control and Case. This plot is useful for identifying the ARGs that are abundant in the Control but not in the Case. The *p-value* was calculated using the Kruskal-Walis test.
+The plot compares the abundance of each ARG term between the Control and Case. This plot is useful for identifying the ARGs that are abundant in the Control but not in the Case. The *p-value* was calculated using the Kruskal-Walis test.
 <br>
 <br>
 <img src="Abundance_Kruskal_Walis.png" alt="Abundance Diversity" style="width: 100%; margin-left: auto; margin-right: auto; display: block;"/>
@@ -237,7 +237,7 @@ The plot shows the comparison between the abundance of each ARG term between the
 
 ### **PCA Plot**
 
-This plot uses Principal Component Analysis (PCA) to calculate the principal components of the count data using data from all ARO terms. Samples are projected on the first two principal components (PCs) and the percent variance explained by those PCs are displayed along the x and y axes. Ideally your samples will cluster by group identifier.
+This plot uses Principal Component Analysis (PCA) to calculate the principal components of the count data using data from all ARO terms. Samples are projected on the first two principal components (PCs), and the variance (%) explained by those PCs is displayed along the x and y axes. Ideally, your samples will be clustered by a group identifier.
 <br>
 <br>
 <img src="PCA_plot.png" alt="PCA Plot" style="width: 100%"/>
