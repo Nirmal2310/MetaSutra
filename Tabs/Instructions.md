@@ -216,6 +216,6 @@ The MetaSutra App has been developed by Nirmal Singh Mahar, Anshul Budhraja, Sum
 
 []
 
-The source code of MetaSutra is available on [Github](https://github.com/Nirmal2310/MetaSutra).
+The source code of MetaSutra is available on [GitHub](https://github.com/Nirmal2310/MetaSutra).
 
-We would appreciate reports of any issues with the app via [Github](https://github.com/Nirmal2310/MetaSutra/issues)
+We would appreciate reports of any issues with the app via [GitHub](https://github.com/Nirmal2310/MetaSutra/issues)
