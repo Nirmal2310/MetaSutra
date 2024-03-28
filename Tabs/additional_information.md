@@ -2,7 +2,7 @@
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-### **MetaShiny app allows users to analyze and visualize metagenomic short-read sequencing data.**
+### **MetaSutra app allows users to analyze and visualize metagenomic short-read sequencing data.**
 
 - It takes a list containing the sample names and their respective groups (Control or Case). 
 
@@ -12,16 +12,16 @@
 
 # **Instructions**
 
-Code can be found on [github](https://github.com/Nirmal2310/MetaShiny)
+Code can be found on [github](https://github.com/Nirmal2310/MetaSutra)
 
-Please post [issues](https://github.com/Nirmal2310/MetaShiny) on github, and feel free to contribute by forking and submitting development branches.
+Please post [issues](https://github.com/Nirmal2310/MetaSutra) on github, and feel free to contribute by forking and submitting development branches.
 
 To run this app locally on your machine, download R or RStudio in the local system.
 
 You may now run the shiny app with just one command in R:
 
 ```
-shiny::runGitHub("MetaShiny", "Nirmal2310")
+shiny::runGitHub("MetaSutra", "Nirmal2310")
 ```
 
 If you are running the App for the first time please tick the checkbox "setup" in the Input Data tab to install the required tools, R packages and databases.
@@ -99,7 +99,7 @@ Example Sample Information file: [Sample Information](Sample_information.csv)
 
 # **Analysis** 
 
-When the list is uploaded, the data is then analyzed by the app. The app first utilizes fastp and bbtools for data pre-processing (removing adapter sequences, low quality reads and host contamination). The preprocessed FASTQ reads are then assembled using SPADES in De Novo fashion. The assembled metagenome is then binned in MAGs (Metagenome Assembled Genomes) using metaWRAP. All the MAGs with % Completeness >= 55 and % Contamination <= 10 are retained for further analysis. Users can change the cutoff while starting the analysis in the Input Data tab. The binned MAGs are annotated using GTDBtk. Antimicrobial Resistance Genes (ARGs) from the binned MAGs are then identified using RGI with CARD database. The uniquely mapped read counts for each ARG are calculated using SAMtools. The final table from the unix pipeline contains the ARO term, Counts, Bacterial Classification and other information. The counts for each ARG terms are then normalized using GPCM method in R and then utilized for further analysis and visualization in R. To determine resistome Case-Control association, we calculated RPKM value (equation 2) of each ARG gene per sample. We then summed up the ARG RPKM abundance per sample and compared the abundance between the Case and Control Groups. To assess the statistical significance of this assosiation, we have used Wilcox rank-sum test. Graphical abstract of Metashiny is shown below:
+When the list is uploaded, the data is then analyzed by the app. The app first utilizes fastp and bbtools for data pre-processing (removing adapter sequences, low quality reads and host contamination). The preprocessed FASTQ reads are then assembled using SPADES in De Novo fashion. The assembled metagenome is then binned in MAGs (Metagenome Assembled Genomes) using metaWRAP. All the MAGs with % Completeness >= 55 and % Contamination <= 10 are retained for further analysis. Users can change the cutoff while starting the analysis in the Input Data tab. The binned MAGs are annotated using GTDBtk. Antimicrobial Resistance Genes (ARGs) from the binned MAGs are then identified using RGI with CARD database. The uniquely mapped read counts for each ARG are calculated using SAMtools. The final table from the unix pipeline contains the ARO term, Counts, Bacterial Classification and other information. The counts for each ARG terms are then normalized using GPCM method in R and then utilized for further analysis and visualization in R. To determine resistome Case-Control association, we calculated RPKM value (equation 2) of each ARG gene per sample. We then summarised the ARG RPKM abundance per sample and compared the abundance between the Case and Control Groups. To assess the statistical significance of this assosiation, we have used Wilcox rank-sum test. Graphical abstract of MetaSutra is shown below:
 <br>
 $$GCPM(i) = \frac{\{Counts(i)/Gene\ \\ Length(i)\}*10^6}{\sum (Counts/Gene\ \\ Length)};\ \\ GCPM(i) = GCPM\ \\ Value\ \\ of\ \\ Gene\ \\ i\ \\ (1)$$
 
@@ -107,7 +107,7 @@ $$RPKM(i) = \frac{Counts(i)*10^6}{(\sum Counts) * Gene\ \\ Length\ \\ (Kb)};\ \\
 
 <br>
 
-<img src="MetaShiny.png" alt="MetaShiny" style="width: 100%"/>
+<img src="MetaSutra.png" alt="MetaSutra" style="width: 100%"/>
 
 <a name="outputdata"></a> 
 
