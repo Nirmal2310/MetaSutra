@@ -1,0 +1,4 @@
+Classification	Family
+Streptococcus_sp000187445	Streptococcaceae
+Escherichia_coli_D	Enterobacteriaceae
+unclassified	unclassified

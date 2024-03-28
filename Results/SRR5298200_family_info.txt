@@ -1,0 +1,6 @@
+Classification	Family
+Streptococcus_sp000187445	Streptococcaceae
+Megamonas_funiformis	Selenomonadaceae
+Bifidobacterium_infantis	Bifidobacteriaceae
+Escherichia_coli	Enterobacteriaceae
+unclassified	unclassified
