@@ -209,7 +209,7 @@ Additional Information about the pipeline and help with all the visualization pl
 
 ## **App Info**
 
-The MetaSutra App has been develoed by Nirmal Singh Mahar, Anshul Budhraja, Suman Pakala, Ishaan Gupta and S.V.Rajagopala*.
+The MetaSutra App has been developed by Nirmal Singh Mahar, Anshul Budhraja, Suman Pakala, Ishaan Gupta and S.V.Rajagopala*.
 
 
 #### **Please cite our App:**
