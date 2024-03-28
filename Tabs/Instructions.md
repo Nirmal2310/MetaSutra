@@ -3,7 +3,7 @@ output:
   html_document:
     theme: united
 ---
-#### **MetaShiny App allows users to process and visualize Metagenomic short-read sequencing data.**
+#### **MetaSutra App allows users to process and visualize Metagenomic short-read sequencing data.**
 
 - **Explore** the app's features with the example count data set pre-loaded by clicking on the Input Data tab.
 - **Upload** your own samples list in the "Input Data" tab.
@@ -209,13 +209,13 @@ Additional Information about the pipeline and help with all the visualization pl
 
 ## **App Info**
 
-The MetaShiny App has been develoed by Nirmal Singh Mahar, Anshul Budhraja, Suman Pakala, Ishaan Gupta and S.V.Rajagopala*.
+The MetaSutra App has been develoed by Nirmal Singh Mahar, Anshul Budhraja, Suman Pakala, Ishaan Gupta and S.V.Rajagopala*.
 
 
 #### **Please cite our App:**
 
 []
 
-The source code of MetaShiny is available on [Github](https://github.com/Nirmal2310/MetaShiny).
+The source code of MetaSutra is available on [Github](https://github.com/Nirmal2310/MetaSutra).
 
-We would appreciate reports of any issues with the app via [Github](https://github.com/Nirmal2310/MetaShiny/issues)
+We would appreciate reports of any issues with the app via [Github](https://github.com/Nirmal2310/MetaSutra/issues)
