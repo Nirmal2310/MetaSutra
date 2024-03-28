@@ -21,7 +21,7 @@ output:
 </style> -->
 
 
-<img src="Drug_class.png" alt="Drug Class vs. ARG Abundance" style="width:45%"/>
+<img src="Drug_Class.png" alt="Drug Class vs. ARG Abundance" style="width:45%"/>
 <img src="Resistance_mechanism.png" alt="Resistance Mechanism" style="width:45%"/>
 <img src="ARG_Cohort_Richness.png" alt="Cohort ARG Richness" style="width:45%"/>
 <img src="ARG_Cohort_Abundance.png" alt="Cohort ARG Abundance" style="width:45%"/>
