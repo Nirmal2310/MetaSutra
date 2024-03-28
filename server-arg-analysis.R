@@ -17,9 +17,9 @@ arg_analysis_plots <- reactive({
         xlab("Drug Class") +
       theme(
         axis.title.x = element_text(size = 15, face = "bold"),
-        axis.text.x = element_text(size = 12, face = "bold"),
+        axis.text.x = element_text(size = 15, face = "bold"),
         axis.title.y = element_text(size = 15, face = "bold"),
-        axis.text.y = element_text(size = 12, face = "bold")
+        axis.text.y = element_text(size = 15, face = "bold")
       )
     return(drug_class_barplot)
     }
@@ -27,16 +27,16 @@ arg_analysis_plots <- reactive({
         res_temp_df <- data %>%
           group_by(Resistance_Mechanism) %>%
           summarise(count = n()) %>%
-          mutate(lab = round((count / sum(count)) * 100)) %>%
+          mutate(lab = round((count / sum(count)) * 100, 2)) %>%
           mutate(lab = paste0(lab, "%"))
     resistance_plot <- res_temp_df %>% ggdonutchart("count", label = "lab",
                                     fill = "Resistance_Mechanism", 
                                     color = "white" ) +
       theme(legend.position = "left") +
       theme(plot.title = element_blank(), plot.subtitle = element_blank(),
-            axis.text.x = element_text(size = 12, face = "bold"),
-            legend.text = element_text(size = 12, face = "bold"),
-            legend.title = element_text(size = 12, face = "bold")) +
+            axis.text.x = element_text(size = 10, face = "bold"),
+            legend.text = element_text(size = 15, face = "bold"),
+            legend.title = element_text(size = 15, face = "bold")) +
       scale_fill_discrete(name = "Resistance Mechanism")
     return(resistance_plot)
     }
