@@ -79,12 +79,12 @@ beta_diversity_analysis <- reactive({
           ylab(paste0("PC2 (", pca.var.per[2], "%", ")")) +
           theme_bw() +
           theme(
-            axis.text.x = element_text(size = 12, face = "bold"),
-            axis.text.y = element_text(size = 12, face = "bold"),
-            legend.text = element_text(size = 12, face = "bold"),
-            axis.title.x = element_text(size = 12, face = "bold"),
-            axis.title.y = element_text(size = 12, face = "bold"),
-            legend.title = element_text(size = 12, face = "bold")
+            axis.text.x = element_text(size = 25, face = "bold"),
+            axis.text.y = element_text(size = 25, face = "bold"),
+            legend.text = element_text(size = 25, face = "bold"),
+            axis.title.x = element_text(size = 25, face = "bold"),
+            axis.title.y = element_text(size = 25, face = "bold"),
+            legend.title = element_text(size = 25, face = "bold")
           )
         return(pca_plot)
     }
