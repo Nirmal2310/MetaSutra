@@ -8,7 +8,7 @@ The app is hosted on Shinyapps.io here:
 
 *Not Available Yet*
 
-To run this app locally on your machine, download R or RStudio and run the following commands once to set up the environment:
+To run this app locally on your machine, download R and run the following commands once to set up the environment:
 ```
 source("server.R")
 source("ui.R")
@@ -17,7 +17,7 @@ runApp()
 You may now run the shiny app with just one command in R:
 
 ```
-shiny::runGitHub("MetaSutra", "Nirmal2310")
+shiny::runGitHub("MetaSutra", "Nirmal2310") # Make Sure that the shiny package is installed in the R.
 ```
 
 Nirmal Singh Mahar<sup>1</sup>, Anshul Budhraja<sup>2</sup>, Suman Pakala<sup>3</sup>, Ishaan Gupta<sup>1</sup>*, Seesandra V. Rajagopala<sup>3</sup>\*.
