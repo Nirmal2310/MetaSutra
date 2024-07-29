@@ -162,16 +162,18 @@ else
         
         cd DATA
 
-        if [ ! -d release95 ]; then
+        if [ ! -d gtdbtk_data ]; then
 
-                wget -c --no-check-certificate https://data.gtdb.ecogenomic.org/releases/release95/95.0/auxillary_files/gtdbtk_r95_data.tar.gz
+                wget -c --no-check-certificate https://data.gtdb.ecogenomic.org/releases/release220/220.0/auxillary_files/gtdbtk_package/full_package/gtdbtk_r220_data.tar.gz -O gtdbtk_data.tar.gz
         
-                tar -xvf gtdbtk_r95_data.tar.gz 
+                mkdir gtdbtk_data
+                
+                tar -xvf gtdbtk_data.tar.gz -C gtdbtk_data --strip 1
         
-                rm -rf *.tar.gz*
+                rm -rf gtdbtk_data.tar.gz
         fi
         
-        cd release95
+        cd gtdbtk_data
         
         echo "export GTDBTK_DATA_PATH=$PWD/" > $gtdbtk_path/envs/gtdbtk/etc/conda/activate.d/gtdbtk.sh
         
