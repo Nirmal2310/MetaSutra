@@ -175,7 +175,15 @@ else
         
         cd gtdbtk_data
         
-        echo "export GTDBTK_DATA_PATH=$PWD/" > $gtdbtk_path/envs/gtdbtk/etc/conda/activate.d/gtdbtk.sh
+        source $path/activate gtdbtk
+
+        conda env config vars set GTDBTK_DATA_PATH="$PWD"
+
+        source $path/deactivate
+
+        source $path/activate gtdbtk # Reactivating Environment to Save Changes
+
+        source $path/activate base
         
         cd $base_dir
 
