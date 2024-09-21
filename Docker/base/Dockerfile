@@ -34,9 +34,13 @@ RUN apt install --yes \
        git \
        wget
 
-ENV http_proxy="http://xen03.iitd.ac.in:3128" # Change the Proxy Accordingly
+# Change the Proxy Accordingly
 
-ENV https_proxy="http://xen03.iitd.ac.in:3128" # Change the Proxy Accordingly
+ENV http_proxy="http://xen03.iitd.ac.in:3128"
+
+# Change the Proxy Accordingly
+
+ENV https_proxy="http://xen03.iitd.ac.in:3128"
 
 RUN cd /tmp/ && \
     wget -O - -c https://github.com/ablab/spades/releases/download/v3.15.5/SPAdes-3.15.5-Linux.tar.gz | \
