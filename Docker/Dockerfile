@@ -10,9 +10,13 @@ ARG BUILD_DATE
 
 RUN echo "VCS_REF: "${VCS_REF}", BUILD_DATE: "${BUILD_DATE}", VERSION: "${VERSION}
 
-ENV http_proxy="http://xen03.iitd.ac.in:3128" # Change the Proxy Accordingly
+# Change the Proxy Accordingly
 
-ENV https_proxy="http://xen03.iitd.ac.in:3128" # Change the Proxy Accordingly
+ENV http_proxy="http://xen03.iitd.ac.in:3128"
+
+# Change the Proxy Accordingly
+
+ENV https_proxy="http://xen03.iitd.ac.in:3128"
 
 RUN mkdir /module
 
